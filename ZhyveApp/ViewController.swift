@@ -8,28 +8,26 @@
 
 import UIKit
 
+enum ScopeType {
+    case liveBelarus
+    case changes
+}
+
 class ViewController: UIViewController {
     
-    @IBOutlet weak var pageViewContainer: UIView!
     @IBOutlet weak var phoneButtton: UIButton!
     @IBOutlet weak var burgerButton: UIButton!
     @IBOutlet weak var lightButton: UIButton!
+    @IBOutlet weak var mainTextLabel: UILabel!
+    @IBOutlet weak var swipeView: UIView!
     
-    private var pageController = UIPageViewController(transitionStyle: .scroll, navigationOrientation: .horizontal, options: nil)
     var currentType: ScopeType = .changes
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        pageController.willMove(toParent: self)
-        pageViewContainer.addSubview(pageController.view)
-        pageController.view.frame = pageViewContainer.bounds
-        pageController.didMove(toParent: self)
-        
-        pageController.dataSource = self
-        pageController.delegate = self
-        
-        pageController.setViewControllers([pageControllerContent(nil)], direction: .forward, animated: true, completion: nil)
+        let swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(respondToSwipeGesture(gesture:)))
+        swipeView.addGestureRecognizer(swipeRight)
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -65,6 +63,9 @@ class ViewController: UIViewController {
     }
     
     func changeUI() {
+        view.backgroundColor = currentType == .liveBelarus ? .white : .redBack
+        mainTextLabel.text = currentType == .liveBelarus ? "Жыве Беларусь!" : "Перамен!"
+        mainTextLabel.textColor = currentType == .liveBelarus ? .blackText : .white
         phoneButtton.backgroundColor = currentType == .liveBelarus ? .white : .redBack
         burgerButton.backgroundColor = currentType == .liveBelarus ? .white : .redBack
         lightButton.backgroundColor = currentType == .liveBelarus ? .white : .redBack
@@ -73,49 +74,20 @@ class ViewController: UIViewController {
         burgerButton.setImage(UIImage.init(named: currentType == .liveBelarus ? "burger_white" : "burger_red"), for: .normal)
     }
     
-    private func pageControllerContent(_ previous: PageContent?) -> PageContent {
-        let vc = storyboard?.instantiateViewController(withIdentifier: "PageContent") as? PageContent
-        if previous?.scopeType ?? .changes == .liveBelarus {
-            vc?.scopeType = .changes
+    @objc func respondToSwipeGesture(gesture: UIGestureRecognizer) {
+        if currentType == .liveBelarus {
+            currentType = .changes
         } else {
-            vc?.scopeType = .liveBelarus
+            currentType = .liveBelarus
         }
-        return vc!
+        UIView.animate(withDuration: 0.5, animations: {
+            self.changeUI()
+        }) { (completed) in
+            
+        }
+    
     }
 
-}
-
-extension ViewController: UIPageViewControllerDataSource {
-    func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
-        guard let vc = viewController as? PageContent else {
-            return nil
-        }
-        return pageControllerContent(vc)
-    }
-    
-    func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
-        guard let vc = viewController as? PageContent else {
-            return nil
-        }
-        return pageControllerContent(vc)
-    }
-    
-    
-}
-
-extension ViewController: UIPageViewControllerDelegate {
-    
-    func pageViewController(_ pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
-        
-        // set the pageControl.currentPage to the index of the current viewController in pages
-        if let viewControllers = pageViewController.viewControllers as? [PageContent] {
-            currentType = viewControllers.first?.scopeType ?? .liveBelarus
-        }
-        
-        if finished && completed {
-            changeUI()
-        }
-    }
 }
 
 extension UIColor {
@@ -140,4 +112,6 @@ extension UIColor {
     static var redBack: UIColor { return UIColor(hex: 0xE71E1E) }
     
     static var blackText: UIColor { return UIColor(hex: 0x1C1C1C) }
+    
+    static var greyText: UIColor { return UIColor(hex: 0x686868) }
 }
