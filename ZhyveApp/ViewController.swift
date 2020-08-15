@@ -20,8 +20,9 @@ class ViewController: UIViewController {
     @IBOutlet weak var lightButton: UIButton!
     @IBOutlet weak var mainTextLabel: UILabel!
     @IBOutlet weak var swipeView: UIView!
+    @IBOutlet weak var overlay: UIView!
     
-    var currentType: ScopeType = .changes
+    var currentType: ScopeType = .liveBelarus
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -86,6 +87,34 @@ class ViewController: UIViewController {
             
         }
     
+    }
+    
+    // MARK: -
+    
+    @IBAction func phoneAction(_ sender: Any?) {
+        if overlay.isHidden {
+            UIView.animate(withDuration: 0.5, animations: {
+                self.phoneButtton.backgroundColor = .white
+                self.burgerButton.backgroundColor = .white
+                self.overlay.isHidden = false
+                self.overlay.alpha = 1
+                self.phoneButtton.setImage(UIImage.init(named: "light"), for: .normal)
+                self.burgerButton.setImage(UIImage.init(named: "burger_white"), for: .normal)
+            }) { (completed) in
+                UIScreen.main.brightness = CGFloat(0.5)
+            }
+        } else {
+            UIView.animate(withDuration: 0.5, animations: {
+                self.overlay.alpha = 0
+                self.phoneButtton.setImage(UIImage.init(named: self.currentType == .liveBelarus ? "phone_white" : "phone_red"), for: .normal)
+                self.burgerButton.setImage(UIImage.init(named: self.currentType == .liveBelarus ? "burger_white" : "burger_red"), for: .normal)
+                self.phoneButtton.backgroundColor = self.currentType == .liveBelarus ? .white : .redBack
+                self.burgerButton.backgroundColor = self.currentType == .liveBelarus ? .white : .redBack
+            }) { (completed) in
+                self.overlay.isHidden = true
+            }
+        }
+        
     }
 
 }

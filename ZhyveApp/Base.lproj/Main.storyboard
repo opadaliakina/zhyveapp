@@ -21,22 +21,6 @@
                                 <color key="textColor" red="0.10980392156862745" green="0.10980392156862745" blue="0.10980392156862745" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lcI-xH-Y4z">
-                                <rect key="frame" x="32" y="113" width="44" height="44"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="44" id="FNe-uk-2rU"/>
-                                    <constraint firstAttribute="width" constant="44" id="qXS-WG-gH7"/>
-                                </constraints>
-                                <state key="normal" image="phone_white"/>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rRL-04-heM">
-                                <rect key="frame" x="338" y="113" width="44" height="44"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="44" id="aj8-g0-eZd"/>
-                                    <constraint firstAttribute="height" constant="44" id="jDC-1N-6kA"/>
-                                </constraints>
-                                <state key="normal" image="burger_white"/>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3pl-F8-nly">
                                 <rect key="frame" x="0.0" y="770" width="414" height="126"/>
                                 <constraints>
@@ -72,22 +56,61 @@
                                     <constraint firstItem="c3H-rG-BYv" firstAttribute="centerX" secondItem="yMV-IR-fyl" secondAttribute="centerX" id="cfH-hk-2nX"/>
                                 </constraints>
                             </view>
+                            <view hidden="YES" alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nce-6d-aQM">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IWs-kq-cuR">
+                                        <rect key="frame" x="0.0" y="298.5" width="414" height="299"/>
+                                        <color key="backgroundColor" red="0.90980392156862744" green="0.11764705882352941" blue="0.11764705882352941" alpha="1" colorSpace="calibratedRGB"/>
+                                    </view>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <constraints>
+                                    <constraint firstItem="IWs-kq-cuR" firstAttribute="centerY" secondItem="nce-6d-aQM" secondAttribute="centerY" id="TaT-pH-r6k"/>
+                                    <constraint firstAttribute="trailing" secondItem="IWs-kq-cuR" secondAttribute="trailing" id="ZUb-po-Cw8"/>
+                                    <constraint firstItem="IWs-kq-cuR" firstAttribute="leading" secondItem="nce-6d-aQM" secondAttribute="leading" id="pMw-92-j53"/>
+                                    <constraint firstItem="IWs-kq-cuR" firstAttribute="height" secondItem="nce-6d-aQM" secondAttribute="height" multiplier="1:3" id="yiv-ba-gfr"/>
+                                </constraints>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lcI-xH-Y4z">
+                                <rect key="frame" x="338" y="113" width="44" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="FNe-uk-2rU"/>
+                                    <constraint firstAttribute="width" constant="44" id="qXS-WG-gH7"/>
+                                </constraints>
+                                <state key="normal" image="phone_white"/>
+                                <connections>
+                                    <action selector="phoneAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="yDE-EA-Xxi"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rRL-04-heM">
+                                <rect key="frame" x="32" y="113" width="44" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="44" id="aj8-g0-eZd"/>
+                                    <constraint firstAttribute="height" constant="44" id="jDC-1N-6kA"/>
+                                </constraints>
+                                <state key="normal" image="burger_white"/>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="nce-6d-aQM" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="1TW-1J-2S1"/>
+                            <constraint firstItem="nce-6d-aQM" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="2TD-HW-ewb"/>
                             <constraint firstItem="yMV-IR-fyl" firstAttribute="top" secondItem="ccI-mr-CiH" secondAttribute="bottom" constant="30" id="8RW-9Q-Vdl"/>
                             <constraint firstItem="lcI-xH-Y4z" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="69" id="DQi-O8-mws"/>
                             <constraint firstAttribute="trailing" secondItem="ccI-mr-CiH" secondAttribute="trailing" constant="32" id="Dzu-lZ-IGg"/>
                             <constraint firstItem="3pl-F8-nly" firstAttribute="top" secondItem="yMV-IR-fyl" secondAttribute="bottom" id="EUS-5f-h48"/>
                             <constraint firstItem="3pl-F8-nly" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="EcH-CN-d0P"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="rRL-04-heM" secondAttribute="trailing" constant="32" id="PKx-Ak-paK"/>
-                            <constraint firstItem="lcI-xH-Y4z" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="32" id="U2E-k4-zC4"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="nce-6d-aQM" secondAttribute="trailing" id="IPv-Im-Vkt"/>
                             <constraint firstItem="rRL-04-heM" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="69" id="V0N-hw-nSY"/>
                             <constraint firstItem="yMV-IR-fyl" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="Vac-zk-cYw"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="lcI-xH-Y4z" secondAttribute="trailing" constant="32" id="YKz-vD-CIe"/>
                             <constraint firstAttribute="bottom" secondItem="3pl-F8-nly" secondAttribute="bottom" id="b5o-F4-nK0"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="yMV-IR-fyl" secondAttribute="trailing" id="d3A-b6-KtK"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="3pl-F8-nly" secondAttribute="trailing" id="fBz-dK-nmv"/>
+                            <constraint firstItem="nce-6d-aQM" firstAttribute="bottom" secondItem="8bC-Xf-vdC" secondAttribute="bottom" id="fJ8-hH-U43"/>
                             <constraint firstItem="ccI-mr-CiH" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="32" id="oOC-Wc-DhP"/>
+                            <constraint firstItem="rRL-04-heM" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="32" id="uLD-xO-IaI"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
@@ -95,13 +118,14 @@
                         <outlet property="burgerButton" destination="rRL-04-heM" id="Uy8-Vt-b2W"/>
                         <outlet property="lightButton" destination="3pl-F8-nly" id="38W-NM-FQX"/>
                         <outlet property="mainTextLabel" destination="ccI-mr-CiH" id="yQ8-l4-ElI"/>
+                        <outlet property="overlay" destination="nce-6d-aQM" id="mmn-af-1wA"/>
                         <outlet property="phoneButtton" destination="lcI-xH-Y4z" id="9Zu-uZ-SCo"/>
                         <outlet property="swipeView" destination="yMV-IR-fyl" id="cZs-qY-Jq8"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="139" y="138"/>
+            <point key="canvasLocation" x="137.68115942028987" y="137.94642857142856"/>
         </scene>
     </scenes>
     <resources>
