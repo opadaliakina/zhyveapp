@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2FF96D3A24E866F6007E6420 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FF96D3924E866F6007E6420 /* Extensions.swift */; };
+		2FF96D3C24E86718007E6420 /* UserSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FF96D3B24E86718007E6420 /* UserSettings.swift */; };
 		BF627B2F24E7D54E00021F2B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF627B2E24E7D54E00021F2B /* AppDelegate.swift */; };
 		BF627B3324E7D54E00021F2B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF627B3224E7D54E00021F2B /* ViewController.swift */; };
 		BF627B3624E7D54E00021F2B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BF627B3424E7D54E00021F2B /* Main.storyboard */; };
@@ -15,6 +17,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2FF96D3924E866F6007E6420 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		2FF96D3B24E86718007E6420 /* UserSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSettings.swift; sourceTree = "<group>"; };
 		BF627B2B24E7D54E00021F2B /* ZhyveApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ZhyveApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BF627B2E24E7D54E00021F2B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BF627B3224E7D54E00021F2B /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -35,6 +39,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2FF96D3D24E867C0007E6420 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				2FF96D3B24E86718007E6420 /* UserSettings.swift */,
+				2FF96D3924E866F6007E6420 /* Extensions.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
 		BF627B2224E7D54E00021F2B = {
 			isa = PBXGroup;
 			children = (
@@ -56,6 +69,7 @@
 			children = (
 				BF627B2E24E7D54E00021F2B /* AppDelegate.swift */,
 				BF627B3224E7D54E00021F2B /* ViewController.swift */,
+				2FF96D3D24E867C0007E6420 /* Components */,
 				BF627B3424E7D54E00021F2B /* Main.storyboard */,
 				BF627B3724E7D55100021F2B /* Assets.xcassets */,
 				BF627B3924E7D55100021F2B /* LaunchScreen.storyboard */,
@@ -136,6 +150,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				BF627B3324E7D54E00021F2B /* ViewController.swift in Sources */,
+				2FF96D3C24E86718007E6420 /* UserSettings.swift in Sources */,
+				2FF96D3A24E866F6007E6420 /* Extensions.swift in Sources */,
 				BF627B2F24E7D54E00021F2B /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -281,6 +297,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = GQ6VRCXLPU;
 				INFOPLIST_FILE = ZhyveApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -298,6 +315,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = GQ6VRCXLPU;
 				INFOPLIST_FILE = ZhyveApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

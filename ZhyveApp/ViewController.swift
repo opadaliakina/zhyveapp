@@ -42,17 +42,16 @@ class ViewController: UIViewController {
     var systemBrightness = CGFloat()
     
     let liveBelarusTiming: [Timing] = [
-        Timing(time: 0.325, state: false),
-        Timing(time: 0.200, state: true),
-        Timing(time: 0.05, state: false),
-        Timing(time: 0.175, state: true),
+        Timing(time: 0.3, state: false),
+        Timing(time: 0.5, state: true),
+        Timing(time: 0.1, state: false),
+        Timing(time: 0.45, state: true),
         Timing(time: 0.200, state: false),
-        Timing(time: 0.1, state: true),
-        Timing(time: 0.05, state: false),
-        Timing(time: 0.150, state: true),
-        Timing(time: 0.05, state: false),
-        Timing(time: 0.150, state: true),
-        Timing(time: 0, state: false)
+        Timing(time: 0.25, state: true),
+        Timing(time: 0.1, state: false),
+        Timing(time: 0.3, state: true),
+        Timing(time: 0.1, state: false),
+        Timing(time: 0.6, state: true),
     ]
     
     let changesTiming: [Timing] = [
@@ -222,6 +221,9 @@ class ViewController: UIViewController {
         do {
             try device.lockForConfiguration()
             device.torchMode = on ? .on : .off
+            if on {
+                UIDevice.vibrate()
+            }
             device.unlockForConfiguration()
             delay(bySeconds: seconds) {
                 completion?()
