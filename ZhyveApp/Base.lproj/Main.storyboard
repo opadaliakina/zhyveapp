@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13122.16" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13104.12"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -9,16 +10,103 @@
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="ZhyveApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" xcode11CocoaTouchSystemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tn8-8f-7Re">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="862"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lcI-xH-Y4z">
+                                <rect key="frame" x="32" y="113" width="44" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="FNe-uk-2rU"/>
+                                    <constraint firstAttribute="width" constant="44" id="qXS-WG-gH7"/>
+                                </constraints>
+                                <state key="normal" image="phone_white"/>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rRL-04-heM">
+                                <rect key="frame" x="338" y="113" width="44" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="44" id="aj8-g0-eZd"/>
+                                    <constraint firstAttribute="height" constant="44" id="jDC-1N-6kA"/>
+                                </constraints>
+                                <state key="normal" image="burger_white"/>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3pl-F8-nly">
+                                <rect key="frame" x="0.0" y="770" width="414" height="126"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="126" id="IVj-Qs-Q9B"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                <state key="normal" title="Святло!">
+                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="tn8-8f-7Re" secondAttribute="trailing" id="21Z-DM-UWz"/>
+                            <constraint firstItem="tn8-8f-7Re" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="5rV-3x-6fT"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="tn8-8f-7Re" secondAttribute="bottom" id="854-5U-7iX"/>
+                            <constraint firstItem="lcI-xH-Y4z" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="69" id="DQi-O8-mws"/>
+                            <constraint firstItem="3pl-F8-nly" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="EcH-CN-d0P"/>
+                            <constraint firstItem="tn8-8f-7Re" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="Hff-ux-B1k"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="rRL-04-heM" secondAttribute="trailing" constant="32" id="PKx-Ak-paK"/>
+                            <constraint firstItem="lcI-xH-Y4z" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="32" id="U2E-k4-zC4"/>
+                            <constraint firstItem="rRL-04-heM" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="69" id="V0N-hw-nSY"/>
+                            <constraint firstAttribute="bottom" secondItem="3pl-F8-nly" secondAttribute="bottom" id="b5o-F4-nK0"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="3pl-F8-nly" secondAttribute="trailing" id="fBz-dK-nmv"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
+                    <connections>
+                        <outlet property="burgerButton" destination="rRL-04-heM" id="Uy8-Vt-b2W"/>
+                        <outlet property="lightButton" destination="3pl-F8-nly" id="38W-NM-FQX"/>
+                        <outlet property="pageViewContainer" destination="tn8-8f-7Re" id="tZ1-Nx-yjr"/>
+                        <outlet property="phoneButtton" destination="lcI-xH-Y4z" id="9Zu-uZ-SCo"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="139" y="138"/>
+        </scene>
+        <!--Page Content-->
+        <scene sceneID="CiT-S6-h73">
+            <objects>
+                <viewController storyboardIdentifier="PageContent" id="Uqa-45-gQX" customClass="PageContent" customModule="ZhyveApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="jxT-gV-V43">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Жыве Беларусь!" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ccI-mr-CiH">
+                                <rect key="frame" x="32" y="367" width="350" height="172"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="72"/>
+                                <color key="textColor" red="0.10980392156862745" green="0.10980392156862745" blue="0.10980392156862745" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="ccI-mr-CiH" firstAttribute="centerY" secondItem="5SM-8T-YTP" secondAttribute="centerY" id="8GW-iG-kzU"/>
+                            <constraint firstAttribute="trailing" secondItem="ccI-mr-CiH" secondAttribute="trailing" constant="32" id="BNp-I1-dYf"/>
+                            <constraint firstItem="ccI-mr-CiH" firstAttribute="leading" secondItem="5SM-8T-YTP" secondAttribute="leading" constant="32" id="PHd-P1-4SQ"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="5SM-8T-YTP"/>
+                    </view>
+                    <connections>
+                        <outlet property="mainTextLabel" destination="ccI-mr-CiH" id="Y5F-77-PKA"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Gse-IH-Fnt" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="962" y="138"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="burger_white" width="14" height="12"/>
+        <image name="phone_white" width="16" height="28"/>
+    </resources>
 </document>
