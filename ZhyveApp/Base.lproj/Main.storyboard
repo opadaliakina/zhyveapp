@@ -15,8 +15,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Жыве Беларусь!" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ccI-mr-CiH">
-                                <rect key="frame" x="32" y="368" width="350" height="172"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Жыве Беларусь!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" minimumScaleFactor="0.69999999999999996" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ccI-mr-CiH">
+                                <rect key="frame" x="32" y="382" width="350" height="172"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="72"/>
                                 <color key="textColor" red="0.10980392156862745" green="0.10980392156862745" blue="0.10980392156862745" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -30,6 +30,9 @@
                                 <state key="normal" title="Святло!">
                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
+                                <connections>
+                                    <action selector="lightAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="eNi-MB-LOB"/>
+                                </connections>
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yMV-IR-fyl">
                                 <rect key="frame" x="0.0" y="570" width="414" height="200"/>
@@ -52,7 +55,9 @@
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstItem="c3H-rG-BYv" firstAttribute="centerY" secondItem="yMV-IR-fyl" secondAttribute="centerY" id="I6i-zb-9P0"/>
-                                    <constraint firstAttribute="height" constant="200" id="Snu-xh-cU8"/>
+                                    <constraint firstAttribute="height" constant="100" id="Snu-xh-cU8">
+                                        <variation key="heightClass=regular-widthClass=compact" constant="200"/>
+                                    </constraint>
                                     <constraint firstItem="c3H-rG-BYv" firstAttribute="centerX" secondItem="yMV-IR-fyl" secondAttribute="centerX" id="cfH-hk-2nX"/>
                                 </constraints>
                             </view>
@@ -64,7 +69,7 @@
                                         <color key="backgroundColor" red="0.90980392156862744" green="0.11764705882352941" blue="0.11764705882352941" alpha="1" colorSpace="calibratedRGB"/>
                                     </view>
                                 </subviews>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstItem="IWs-kq-cuR" firstAttribute="centerY" secondItem="nce-6d-aQM" secondAttribute="centerY" id="TaT-pH-r6k"/>
                                     <constraint firstAttribute="trailing" secondItem="IWs-kq-cuR" secondAttribute="trailing" id="ZUb-po-Cw8"/>
@@ -95,24 +100,52 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="nce-6d-aQM" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="1TW-1J-2S1"/>
-                            <constraint firstItem="nce-6d-aQM" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="2TD-HW-ewb"/>
-                            <constraint firstItem="yMV-IR-fyl" firstAttribute="top" secondItem="ccI-mr-CiH" secondAttribute="bottom" constant="30" id="8RW-9Q-Vdl"/>
+                            <constraint firstItem="nce-6d-aQM" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="2TD-HW-ewb"/>
+                            <constraint firstItem="ccI-mr-CiH" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="3pp-VV-C44"/>
+                            <constraint firstItem="yMV-IR-fyl" firstAttribute="top" secondItem="ccI-mr-CiH" secondAttribute="bottom" constant="16" id="8RW-9Q-Vdl"/>
+                            <constraint firstItem="lcI-xH-Y4z" firstAttribute="leading" secondItem="ccI-mr-CiH" secondAttribute="trailing" constant="16" id="AFR-6m-QIS"/>
                             <constraint firstItem="lcI-xH-Y4z" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="69" id="DQi-O8-mws"/>
-                            <constraint firstAttribute="trailing" secondItem="ccI-mr-CiH" secondAttribute="trailing" constant="32" id="Dzu-lZ-IGg"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="ccI-mr-CiH" secondAttribute="trailing" constant="32" id="Dzu-lZ-IGg"/>
                             <constraint firstItem="3pl-F8-nly" firstAttribute="top" secondItem="yMV-IR-fyl" secondAttribute="bottom" id="EUS-5f-h48"/>
-                            <constraint firstItem="3pl-F8-nly" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="EcH-CN-d0P"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="nce-6d-aQM" secondAttribute="trailing" id="IPv-Im-Vkt"/>
+                            <constraint firstItem="3pl-F8-nly" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="EcH-CN-d0P"/>
+                            <constraint firstAttribute="trailing" secondItem="nce-6d-aQM" secondAttribute="trailing" id="IPv-Im-Vkt"/>
                             <constraint firstItem="rRL-04-heM" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="69" id="V0N-hw-nSY"/>
                             <constraint firstItem="yMV-IR-fyl" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="Vac-zk-cYw"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="lcI-xH-Y4z" secondAttribute="trailing" constant="32" id="YKz-vD-CIe"/>
                             <constraint firstAttribute="bottom" secondItem="3pl-F8-nly" secondAttribute="bottom" id="b5o-F4-nK0"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="yMV-IR-fyl" secondAttribute="trailing" id="d3A-b6-KtK"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="3pl-F8-nly" secondAttribute="trailing" id="fBz-dK-nmv"/>
+                            <constraint firstItem="ccI-mr-CiH" firstAttribute="leading" secondItem="rRL-04-heM" secondAttribute="trailing" constant="16" id="d4v-3k-GCY"/>
+                            <constraint firstAttribute="trailing" secondItem="3pl-F8-nly" secondAttribute="trailing" id="fBz-dK-nmv"/>
                             <constraint firstItem="nce-6d-aQM" firstAttribute="bottom" secondItem="8bC-Xf-vdC" secondAttribute="bottom" id="fJ8-hH-U43"/>
-                            <constraint firstItem="ccI-mr-CiH" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="32" id="oOC-Wc-DhP"/>
+                            <constraint firstItem="ccI-mr-CiH" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="32" id="oOC-Wc-DhP"/>
                             <constraint firstItem="rRL-04-heM" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="32" id="uLD-xO-IaI"/>
+                            <constraint firstItem="ccI-mr-CiH" firstAttribute="leading" secondItem="rRL-04-heM" secondAttribute="trailing" constant="16" id="yda-VX-oC9"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="Dzu-lZ-IGg"/>
+                                <exclude reference="3pp-VV-C44"/>
+                                <exclude reference="oOC-Wc-DhP"/>
+                            </mask>
+                        </variation>
+                        <variation key="heightClass=compact-widthClass=regular">
+                            <mask key="constraints">
+                                <include reference="3pp-VV-C44"/>
+                                <include reference="d4v-3k-GCY"/>
+                                <exclude reference="yda-VX-oC9"/>
+                                <include reference="AFR-6m-QIS"/>
+                            </mask>
+                        </variation>
+                        <variation key="heightClass=regular-widthClass=compact">
+                            <mask key="constraints">
+                                <include reference="Dzu-lZ-IGg"/>
+                                <exclude reference="d4v-3k-GCY"/>
+                                <include reference="oOC-Wc-DhP"/>
+                                <exclude reference="yda-VX-oC9"/>
+                                <exclude reference="AFR-6m-QIS"/>
+                            </mask>
+                        </variation>
                     </view>
                     <connections>
                         <outlet property="burgerButton" destination="rRL-04-heM" id="Uy8-Vt-b2W"/>

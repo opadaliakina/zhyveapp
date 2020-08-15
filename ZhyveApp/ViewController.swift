@@ -7,10 +7,16 @@
 //
 
 import UIKit
+import AVFoundation
 
 enum ScopeType {
     case liveBelarus
     case changes
+}
+
+public struct Timing {
+    var time = Double()
+    var state = Bool()
 }
 
 class ViewController: UIViewController {
@@ -23,12 +29,43 @@ class ViewController: UIViewController {
     @IBOutlet weak var overlay: UIView!
     
     var currentType: ScopeType = .liveBelarus
+    var flashOn = false {
+        didSet {
+            lightButton.setTitle(flashOn ? "Спынiць!" : "Святло!", for: .normal)
+            if !flashOn {
+                counter = -1
+                flash(on: false, forTime: 0, completion: nil) // выключает все
+            }
+        }
+    }
+    var counter: Int = 0
+    var systemBrightness = CGFloat()
+    
+    let liveBelarusTiming: [Timing] = [
+        Timing(time: 0.325, state: false),
+        Timing(time: 0.200, state: true),
+        Timing(time: 0.05, state: false),
+        Timing(time: 0.175, state: true),
+        Timing(time: 0.200, state: false),
+        Timing(time: 0.1, state: true),
+        Timing(time: 0.05, state: false),
+        Timing(time: 0.150, state: true),
+        Timing(time: 0.05, state: false),
+        Timing(time: 0.150, state: true),
+        Timing(time: 0, state: false)
+    ]
+    
+    let changesTiming: [Timing] = [
+        Timing(time: 0, state: false)
+    ]
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
         let swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(respondToSwipeGesture(gesture:)))
         swipeView.addGestureRecognizer(swipeRight)
+        let overlayTapRecognizer = UITapGestureRecognizer(target: self, action: #selector(overlayTap))
+        overlay.addGestureRecognizer(overlayTapRecognizer)
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -37,6 +74,19 @@ class ViewController: UIViewController {
         makeButtonUI(phoneButtton)
         makeButtonUI(burgerButton)
         makeButtonUI(lightButton)
+        mainLabelTextAligment()
+    }
+    
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
+        print(mainTextLabel.textAlignment.rawValue)
+        coordinator.animateAlongsideTransition(in: self.view, animation: { [weak self] (context) in
+            guard let self = self else {return}
+            self.mainLabelTextAligment()
+            
+        }) { (completionContext) in
+            print(self.mainTextLabel.textAlignment.rawValue)
+        }
     }
     
     func bottomButonUI() {
@@ -75,7 +125,26 @@ class ViewController: UIViewController {
         burgerButton.setImage(UIImage.init(named: currentType == .liveBelarus ? "burger_white" : "burger_red"), for: .normal)
     }
     
+    func hideTopButtons(_ hide: Bool, delay: TimeInterval = 0) {
+        UIView.animate(withDuration: 0.3, delay: delay, options: [.allowUserInteraction,.curveEaseInOut], animations: {
+            self.burgerButton.alpha = hide ? 0 : 1
+            self.phoneButtton.alpha = hide ? 0 : 1
+        }) { (completed) in
+            
+        }
+    }
+    
+    func mainLabelTextAligment() {
+        switch UIApplication.shared.statusBarOrientation {
+        case .landscapeLeft,.landscapeRight:
+            self.mainTextLabel.textAlignment = .center
+        case .portrait, .portraitUpsideDown,.unknown:
+            self.mainTextLabel.textAlignment = .left
+        }
+    }
+    
     @objc func respondToSwipeGesture(gesture: UIGestureRecognizer) {
+        flashOn = false
         if currentType == .liveBelarus {
             currentType = .changes
         } else {
@@ -89,10 +158,16 @@ class ViewController: UIViewController {
     
     }
     
+    @objc func overlayTap() {
+        burgerButton.alpha == 1 ? hideTopButtons(true) : hideTopButtons(false)
+    }
+    
     // MARK: -
     
     @IBAction func phoneAction(_ sender: Any?) {
+        flashOn = false
         if overlay.isHidden {
+            systemBrightness = UIScreen.main.brightness
             UIView.animate(withDuration: 0.5, animations: {
                 self.phoneButtton.backgroundColor = .white
                 self.burgerButton.backgroundColor = .white
@@ -101,7 +176,8 @@ class ViewController: UIViewController {
                 self.phoneButtton.setImage(UIImage.init(named: "light"), for: .normal)
                 self.burgerButton.setImage(UIImage.init(named: "burger_white"), for: .normal)
             }) { (completed) in
-                UIScreen.main.brightness = CGFloat(0.5)
+                UIScreen.main.brightness = CGFloat(1)
+                self.hideTopButtons(true, delay: 0.5)
             }
         } else {
             UIView.animate(withDuration: 0.5, animations: {
@@ -112,11 +188,54 @@ class ViewController: UIViewController {
                 self.burgerButton.backgroundColor = self.currentType == .liveBelarus ? .white : .redBack
             }) { (completed) in
                 self.overlay.isHidden = true
+                UIScreen.main.brightness = self.systemBrightness
+                self.hideTopButtons(false, delay: 0.5)
             }
         }
         
     }
-
+    
+    @IBAction func lightAction(_ sender: Any) {
+        flashOn.toggle()
+        counter = 0
+        recursionFlash()
+    }
+    
+    private func recursionFlash() {
+        if flashOn, counter >= 0 {
+            let timing = self.currentType == .liveBelarus ? liveBelarusTiming : changesTiming
+            self.flash(on: timing[counter].state, forTime: timing[counter].time) {
+                if self.counter == timing.count - 1 {
+                    self.counter = 0
+                } else {
+                    self.counter += 1
+                }
+                self.recursionFlash()
+            }
+        }
+    }
+    
+    // MARK: - Flash
+    
+    private func flash(on: Bool, forTime seconds: Double, completion: (() -> Void)?) {
+        guard let device = AVCaptureDevice.default(for: AVMediaType.video), device.hasTorch else { return }
+        do {
+            try device.lockForConfiguration()
+            device.torchMode = on ? .on : .off
+            device.unlockForConfiguration()
+            delay(bySeconds: seconds) {
+                completion?()
+            }
+        } catch {
+            print("Torch could not be on")
+        }
+    }
+    
+    
+    public func delay(bySeconds seconds: Double, closure: @escaping () -> Void) {
+        let dispatchTime = DispatchTime.now() + seconds
+        DispatchQueue.main.asyncAfter(deadline: dispatchTime, execute: closure)
+    }
 }
 
 extension UIColor {
