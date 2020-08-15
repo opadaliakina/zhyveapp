@@ -66,6 +66,10 @@ class ViewController: UIViewController {
         let overlayTapRecognizer = UITapGestureRecognizer(target: self, action: #selector(overlayTap))
         overlay.addGestureRecognizer(overlayTapRecognizer)
     }
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .darkContent
+       }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)

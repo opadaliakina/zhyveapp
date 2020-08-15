@@ -15,7 +15,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Жыве Беларусь!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" minimumScaleFactor="0.69999999999999996" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ccI-mr-CiH">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Жыве Беларусь!" lineBreakMode="tailTruncation" numberOfLines="2" minimumScaleFactor="0.69999999999999996" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ccI-mr-CiH">
                                 <rect key="frame" x="32" y="382" width="350" height="172"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="72"/>
                                 <color key="textColor" red="0.10980392156862745" green="0.10980392156862745" blue="0.10980392156862745" alpha="1" colorSpace="calibratedRGB"/>
@@ -131,19 +131,19 @@
                         </variation>
                         <variation key="heightClass=compact-widthClass=regular">
                             <mask key="constraints">
+                                <include reference="AFR-6m-QIS"/>
                                 <include reference="3pp-VV-C44"/>
                                 <include reference="d4v-3k-GCY"/>
                                 <exclude reference="yda-VX-oC9"/>
-                                <include reference="AFR-6m-QIS"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">
                             <mask key="constraints">
                                 <include reference="Dzu-lZ-IGg"/>
+                                <exclude reference="AFR-6m-QIS"/>
                                 <exclude reference="d4v-3k-GCY"/>
                                 <include reference="oOC-Wc-DhP"/>
                                 <exclude reference="yda-VX-oC9"/>
-                                <exclude reference="AFR-6m-QIS"/>
                             </mask>
                         </variation>
                     </view>
