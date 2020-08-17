@@ -15,8 +15,9 @@ enum ScopeType {
 }
 
 public struct Timing {
-    var time = Double()
-    var state = Bool()
+    var time: Double?
+    var state: Bool?
+    var range: NSRange?
 }
 
 class ViewController: UIViewController {
@@ -34,11 +35,15 @@ class ViewController: UIViewController {
             lightButton.setTitle(flashOn ? "Спынiць!" : "Святло!", for: .normal)
             if !flashOn {
                 counter = -1
+                textCounter = -1
                 flash(on: false, forTime: 0, completion: nil) // выключает все
+                flashText(NSRange(location: 0, length: 0), forTime: 0, completion: nil)
             }
         }
     }
     var counter: Int = 0
+    var textCounter: Int = 0
+    
     var systemBrightness = CGFloat()
     
     let liveBelarusTiming: [Timing] = [
@@ -54,23 +59,39 @@ class ViewController: UIViewController {
         Timing(time: 0.6, state: true),
     ]
     
+    let textLiveTiming: [Timing] = [
+        Timing(time: 0.3, range: NSRange(location: 0, length: 0)), // выкл
+        Timing(time: 0.5, range: NSRange(location: 0, length: 2)), // ЖЫ
+        Timing(time: 0.1, range: NSRange(location: 0, length: 0)), // выкл
+        Timing(time: 0.45, range: NSRange(location: 2, length: 2)), // ВЕ
+        Timing(time: 0.2, range: NSRange(location: 0, length: 0)), // выкл
+        Timing(time: 0.25, range: NSRange(location: 5, length: 2)), // _БЕ
+        Timing(time: 0.1, range: NSRange(location: 0, length: 0)), // выкл
+        Timing(time: 0.3, range: NSRange(location: 7, length: 2)), // ЛА
+        Timing(time: 0.1, range: NSRange(location: 0, length: 0)), // выкл
+        Timing(time: 0.6, range: NSRange(location: 9, length: 5)) // РУСЬ!
+    ]
+    
+    let textChangeTiming: [Timing] = [
+        Timing(time: 0, range: NSRange(location: 0, length: 0))]
+    
     let changesTiming: [Timing] = [
         Timing(time: 0, state: false)
     ]
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        let swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(respondToSwipeGesture(gesture:)))
-//        swipeView.addGestureRecognizer(swipeRight)
+        //        let swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(respondToSwipeGesture(gesture:)))
+        //        swipeView.addGestureRecognizer(swipeRight)
         let overlayTapRecognizer = UITapGestureRecognizer(target: self, action: #selector(overlayTap))
         overlay.addGestureRecognizer(overlayTapRecognizer)
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .darkContent
-       }
-
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
@@ -95,8 +116,8 @@ class ViewController: UIViewController {
     func bottomButonUI() {
         let shadowLayer = CAShapeLayer()
         shadowLayer.path = UIBezierPath(roundedRect: lightButton.bounds,
-        byRoundingCorners: [.topLeft , .topRight],
-            cornerRadii: CGSize(width: 22, height: 22)).cgPath
+                                        byRoundingCorners: [.topLeft , .topRight],
+                                        cornerRadii: CGSize(width: 22, height: 22)).cgPath
         shadowLayer.shadowPath = shadowLayer.path
         shadowLayer.fillColor = UIColor.white.cgColor
         shadowLayer.shadowColor = UIColor.black.cgColor
@@ -158,7 +179,7 @@ class ViewController: UIViewController {
         }) { (completed) in
             
         }
-    
+        
     }
     
     @objc func overlayTap() {
@@ -220,22 +241,51 @@ class ViewController: UIViewController {
         print(Clock.now)
         flashOn.toggle()
         counter = 0
+        textCounter = 0
+        recursionTextFlash()
         recursionFlash()
     }
     
     private func recursionFlash() {
         if flashOn, counter >= 0 {
-            let timing = self.currentType == .liveBelarus ? liveBelarusTiming : changesTiming
-            self.flash(on: timing[counter].state, forTime: timing[counter].time) {
-                if self.counter == timing.count - 1 {
-                    self.counter = 0
-                } else {
-                    self.counter += 1
-                }
+            let timesArray = self.currentType == .liveBelarus ? liveBelarusTiming : changesTiming
+            guard let state = timesArray[counter].state, let timing = timesArray[counter].time else {return}
+            self.flash(on: state, forTime: timing) {
+                self.counter = self.counter == timesArray.count - 1 ? 0 : self.counter + 1
                 self.recursionFlash()
             }
         }
     }
+    private func recursionTextFlash() {
+        if flashOn, textCounter >= 0 {
+            let textTimingArray = self.currentType == .liveBelarus ? textLiveTiming : textChangeTiming
+            guard let range = textTimingArray[textCounter].range, let timing = textTimingArray[textCounter].time else {return}
+            self.flashText(range, forTime: timing) {
+                self.textCounter = self.textCounter == textTimingArray.count - 1 ? 0 : self.textCounter + 1
+                self.recursionTextFlash()
+            }
+        }
+    }
+    
+    // MARK: - Text
+    
+    func flashText(_ range: NSRange, forTime seconds: Double, completion: (() -> Void)?) {
+        if currentType == .changes {
+            return
+        }
+        let attributed = NSMutableAttributedString(string: "Жыве Беларусь!")
+        if range != NSRange(location: 0, length: 0) {
+            attributed.addAttribute(.foregroundColor, value: UIColor.blackText, range: NSMakeRange(0, range.location))
+            attributed.addAttribute(.foregroundColor, value: UIColor.redBack, range: range)
+        } else {
+            attributed.addAttribute(.foregroundColor, value: UIColor.blackText, range: NSMakeRange(0, range.location))
+        }
+        self.mainTextLabel.attributedText = attributed
+        self.delay(bySeconds: seconds) {
+            completion?()
+        }
+    }
+    
     
     // MARK: - Flash
     
@@ -264,15 +314,15 @@ class ViewController: UIViewController {
 }
 
 extension UIColor {
-
+    
     convenience init(red: Int, green: Int, blue: Int, alpha: Float = 1.0) {
         assert(red >= 0 && red <= 255, "Invalid red component")
         assert(green >= 0 && green <= 255, "Invalid green component")
         assert(blue >= 0 && blue <= 255, "Invalid blue component")
-    
+        
         self.init(red: CGFloat(red) / 255.0, green: CGFloat(green) / 255.0, blue: CGFloat(blue) / 255.0, alpha: CGFloat(alpha))
     }
-
+    
     convenience init(hex: Int, alpha: Float = 1.0) {
         self.init(
             red: (hex >> 16) & 0xFF,
