@@ -9,6 +9,17 @@
 /* Begin PBXBuildFile section */
 		2FF96D3A24E866F6007E6420 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FF96D3924E866F6007E6420 /* Extensions.swift */; };
 		2FF96D3C24E86718007E6420 /* UserSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FF96D3B24E86718007E6420 /* UserSettings.swift */; };
+		BF4FD17524EABE7A0040E67E /* Data+Bytes.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF4FD16B24EABE7A0040E67E /* Data+Bytes.swift */; };
+		BF4FD17624EABE7A0040E67E /* InternetAddress.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF4FD16C24EABE7A0040E67E /* InternetAddress.swift */; };
+		BF4FD17724EABE7A0040E67E /* DNSResolver.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF4FD16D24EABE7A0040E67E /* DNSResolver.swift */; };
+		BF4FD17824EABE7A0040E67E /* NTPClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF4FD16E24EABE7A0040E67E /* NTPClient.swift */; };
+		BF4FD17924EABE7A0040E67E /* Clock.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF4FD16F24EABE7A0040E67E /* Clock.swift */; };
+		BF4FD17A24EABE7A0040E67E /* TimeFreeze.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF4FD17024EABE7A0040E67E /* TimeFreeze.swift */; };
+		BF4FD17B24EABE7A0040E67E /* TimeStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF4FD17124EABE7A0040E67E /* TimeStorage.swift */; };
+		BF4FD17C24EABE7A0040E67E /* NSTimer+ClosureKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF4FD17224EABE7A0040E67E /* NSTimer+ClosureKit.swift */; };
+		BF4FD17D24EABE7A0040E67E /* NTPPacket.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF4FD17324EABE7A0040E67E /* NTPPacket.swift */; };
+		BF4FD17E24EABE7A0040E67E /* NTPProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF4FD17424EABE7A0040E67E /* NTPProtocol.swift */; };
+		BF4FD18024EAC3060040E67E /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF4FD17F24EAC3060040E67E /* Reachability.swift */; };
 		BF627B2F24E7D54E00021F2B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF627B2E24E7D54E00021F2B /* AppDelegate.swift */; };
 		BF627B3324E7D54E00021F2B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF627B3224E7D54E00021F2B /* ViewController.swift */; };
 		BF627B3624E7D54E00021F2B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BF627B3424E7D54E00021F2B /* Main.storyboard */; };
@@ -19,6 +30,17 @@
 /* Begin PBXFileReference section */
 		2FF96D3924E866F6007E6420 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		2FF96D3B24E86718007E6420 /* UserSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSettings.swift; sourceTree = "<group>"; };
+		BF4FD16B24EABE7A0040E67E /* Data+Bytes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Data+Bytes.swift"; sourceTree = "<group>"; };
+		BF4FD16C24EABE7A0040E67E /* InternetAddress.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InternetAddress.swift; sourceTree = "<group>"; };
+		BF4FD16D24EABE7A0040E67E /* DNSResolver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DNSResolver.swift; sourceTree = "<group>"; };
+		BF4FD16E24EABE7A0040E67E /* NTPClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NTPClient.swift; sourceTree = "<group>"; };
+		BF4FD16F24EABE7A0040E67E /* Clock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Clock.swift; sourceTree = "<group>"; };
+		BF4FD17024EABE7A0040E67E /* TimeFreeze.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeFreeze.swift; sourceTree = "<group>"; };
+		BF4FD17124EABE7A0040E67E /* TimeStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeStorage.swift; sourceTree = "<group>"; };
+		BF4FD17224EABE7A0040E67E /* NSTimer+ClosureKit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSTimer+ClosureKit.swift"; sourceTree = "<group>"; };
+		BF4FD17324EABE7A0040E67E /* NTPPacket.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NTPPacket.swift; sourceTree = "<group>"; };
+		BF4FD17424EABE7A0040E67E /* NTPProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NTPProtocol.swift; sourceTree = "<group>"; };
+		BF4FD17F24EAC3060040E67E /* Reachability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 		BF627B2B24E7D54E00021F2B /* ZhyveApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ZhyveApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BF627B2E24E7D54E00021F2B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BF627B3224E7D54E00021F2B /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -48,6 +70,23 @@
 			path = Components;
 			sourceTree = "<group>";
 		};
+		BF4FD16A24EABE5D0040E67E /* Kronos */ = {
+			isa = PBXGroup;
+			children = (
+				BF4FD16F24EABE7A0040E67E /* Clock.swift */,
+				BF4FD16B24EABE7A0040E67E /* Data+Bytes.swift */,
+				BF4FD16D24EABE7A0040E67E /* DNSResolver.swift */,
+				BF4FD16C24EABE7A0040E67E /* InternetAddress.swift */,
+				BF4FD17224EABE7A0040E67E /* NSTimer+ClosureKit.swift */,
+				BF4FD16E24EABE7A0040E67E /* NTPClient.swift */,
+				BF4FD17324EABE7A0040E67E /* NTPPacket.swift */,
+				BF4FD17424EABE7A0040E67E /* NTPProtocol.swift */,
+				BF4FD17024EABE7A0040E67E /* TimeFreeze.swift */,
+				BF4FD17124EABE7A0040E67E /* TimeStorage.swift */,
+			);
+			path = Kronos;
+			sourceTree = "<group>";
+		};
 		BF627B2224E7D54E00021F2B = {
 			isa = PBXGroup;
 			children = (
@@ -67,8 +106,10 @@
 		BF627B2D24E7D54E00021F2B /* ZhyveApp */ = {
 			isa = PBXGroup;
 			children = (
+				BF4FD16A24EABE5D0040E67E /* Kronos */,
 				BF627B2E24E7D54E00021F2B /* AppDelegate.swift */,
 				BF627B3224E7D54E00021F2B /* ViewController.swift */,
+				BF4FD17F24EAC3060040E67E /* Reachability.swift */,
 				2FF96D3D24E867C0007E6420 /* Components */,
 				BF627B3424E7D54E00021F2B /* Main.storyboard */,
 				BF627B3724E7D55100021F2B /* Assets.xcassets */,
@@ -151,8 +192,19 @@
 			files = (
 				BF627B3324E7D54E00021F2B /* ViewController.swift in Sources */,
 				2FF96D3C24E86718007E6420 /* UserSettings.swift in Sources */,
+				BF4FD17D24EABE7A0040E67E /* NTPPacket.swift in Sources */,
 				2FF96D3A24E866F6007E6420 /* Extensions.swift in Sources */,
+				BF4FD17A24EABE7A0040E67E /* TimeFreeze.swift in Sources */,
+				BF4FD17B24EABE7A0040E67E /* TimeStorage.swift in Sources */,
+				BF4FD17924EABE7A0040E67E /* Clock.swift in Sources */,
+				BF4FD17824EABE7A0040E67E /* NTPClient.swift in Sources */,
+				BF4FD18024EAC3060040E67E /* Reachability.swift in Sources */,
+				BF4FD17724EABE7A0040E67E /* DNSResolver.swift in Sources */,
+				BF4FD17524EABE7A0040E67E /* Data+Bytes.swift in Sources */,
+				BF4FD17C24EABE7A0040E67E /* NSTimer+ClosureKit.swift in Sources */,
 				BF627B2F24E7D54E00021F2B /* AppDelegate.swift in Sources */,
+				BF4FD17E24EABE7A0040E67E /* NTPProtocol.swift in Sources */,
+				BF4FD17624EABE7A0040E67E /* InternetAddress.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -297,13 +349,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = GQ6VRCXLPU;
+				DEVELOPMENT_TEAM = 7KY3GQTNV6;
 				INFOPLIST_FILE = ZhyveApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.zhyvebelarus.zhyveapp.ZhyveApp;
+				PRODUCT_BUNDLE_IDENTIFIER = by.naveksoft.cctv;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -314,15 +366,17 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = GQ6VRCXLPU;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = 7KY3GQTNV6;
 				INFOPLIST_FILE = ZhyveApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.zhyvebelarus.zhyveapp.ZhyveApp;
+				PRODUCT_BUNDLE_IDENTIFIER = by.naveksoft.cctv;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "Cctv Development";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

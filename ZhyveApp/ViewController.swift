@@ -61,8 +61,8 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(respondToSwipeGesture(gesture:)))
-        swipeView.addGestureRecognizer(swipeRight)
+//        let swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(respondToSwipeGesture(gesture:)))
+//        swipeView.addGestureRecognizer(swipeRight)
         let overlayTapRecognizer = UITapGestureRecognizer(target: self, action: #selector(overlayTap))
         overlay.addGestureRecognizer(overlayTapRecognizer)
     }
@@ -198,7 +198,26 @@ class ViewController: UIViewController {
         
     }
     
-    @IBAction func lightAction(_ sender: Any) {
+    @IBAction func lightAction(_ sender: Any?) {
+        if Reachability.isConnectedToNetwork() {
+            Clock.sync(from: "time.apple.com", samples: 0, first: { (date, offset) in
+                self.checkIfCanFireFlash(date: date)
+            }, completion: nil)
+        } else {
+            checkIfCanFireFlash(date: Date())
+        }
+    }
+    
+    func checkIfCanFireFlash(date: Date) {
+        let seconds = Calendar.current.component(.second, from: date)
+        if seconds %  2 != 0 {
+            print("scheduled")
+            Timer.scheduledTimer(timeInterval: 0.5, target: self,
+                                 selector: #selector(self.lightAction(_:)),
+                                 userInfo: nil, repeats: false)
+            return
+        }
+        print(Clock.now)
         flashOn.toggle()
         counter = 0
         recursionFlash()
