@@ -38,39 +38,44 @@ class ViewController: UIViewController {
                 textCounter = -1
                 flash(on: false, forTime: 0, completion: nil) // выключает все
                 flashText(NSRange(location: 0, length: 0), forTime: 0, completion: nil)
+                loopTimer?.invalidate()
+                fullCycleTimer?.invalidate()
             }
         }
     }
     var counter: Int = 0
     var textCounter: Int = 0
     
+    var fullCycleTimer: Timer? = Timer()
+    var loopTimer: Timer? = Timer()
+    
     var systemBrightness = CGFloat()
     
     let liveBelarusTiming: [Timing] = [
-        Timing(time: 0.35, state: true),
-        Timing(time: 0.075, state: false),
-        Timing(time: 0.3, state: true),
-        Timing(time: 0.2, state: false),
-        Timing(time: 0.15, state: true),
-        Timing(time: 0.075, state: false),
-        Timing(time: 0.15, state: true),
-        Timing(time: 0.075, state: false),
-        Timing(time: 0.15, state: true),
-        Timing(time: 0.075, state: false),
+        Timing(time: 0.35, state: true, range: NSRange(location: 0, length: 2)),
+        Timing(time: 0.075, state: false, range: NSRange(location: 0, length: 0)),
+        Timing(time: 0.3, state: true, range: NSRange(location: 2, length: 2)),
+        Timing(time: 0.2, state: false, range: NSRange(location: 0, length: 0)),
+        Timing(time: 0.15, state: true, range: NSRange(location: 5, length: 2)),
+        Timing(time: 0.075, state: false, range: NSRange(location: 0, length: 0)),
+        Timing(time: 0.15, state: true, range: NSRange(location: 7, length: 2)),
+        Timing(time: 0.075, state: false, range: NSRange(location: 0, length: 0)),
+        Timing(time: 0.15, state: true, range: NSRange(location: 9, length: 5)),
+        Timing(time: 0.075, state: false, range: NSRange(location: 0, length: 0))
     ]
     
-    let textLiveTiming: [Timing] = [
-        Timing(time: 0.3, range: NSRange(location: 0, length: 2)), // ЖЫ
-        Timing(time: 0.2, range: NSRange(location: 0, length: 0)), // выкл
-        Timing(time: 0.35, range: NSRange(location: 2, length: 2)), // ВЕ
-        Timing(time: 0.25, range: NSRange(location: 0, length: 0)), // выкл
-        Timing(time: 0.15, range: NSRange(location: 5, length: 2)), // _БЕ
-        Timing(time: 0.05, range: NSRange(location: 0, length: 0)), // выкл
-        Timing(time: 0.15, range: NSRange(location: 7, length: 2)), // ЛА
-        Timing(time: 0.05, range: NSRange(location: 0, length: 0)), // выкл
-        Timing(time: 0.2, range: NSRange(location: 9, length: 5)), // РУСЬ!
-        Timing(time: 0.2, range: NSRange(location: 0, length: 0)) // выкл
-    ]
+//    let textLiveTiming: [Timing] = [
+//        Timing(time: 0.3, range: NSRange(location: 0, length: 2)), // ЖЫ
+//        Timing(time: 0.2, range: NSRange(location: 0, length: 0)), // выкл
+//        Timing(time: 0.35, range: NSRange(location: 2, length: 2)), // ВЕ
+//        Timing(time: 0.25, range: NSRange(location: 0, length: 0)), // выкл
+//        Timing(time: 0.15, range: NSRange(location: 5, length: 2)), // _БЕ
+//        Timing(time: 0.05, range: NSRange(location: 0, length: 0)), // выкл
+//        Timing(time: 0.15, range: NSRange(location: 7, length: 2)), // ЛА
+//        Timing(time: 0.05, range: NSRange(location: 0, length: 0)), // выкл
+//        Timing(time: 0.2, range: NSRange(location: 9, length: 5)), // РУСЬ!
+//        Timing(time: 0.2, range: NSRange(location: 0, length: 0)) // выкл
+//    ]
     
     let textChangeTiming: [Timing] = [
         Timing(time: 0, range: NSRange(location: 0, length: 0))]
@@ -219,16 +224,15 @@ class ViewController: UIViewController {
     }
     
     @IBAction func lightAction(_ sender: Any?) {
+        self.flashOn.toggle()
         if flashOn {
-            self.flashOn.toggle()
-            return
-        }
-        if Reachability.isConnectedToNetwork() {
-            Clock.sync(from: "time.google.com", samples: 0, first: { (date, offset) in
-                self.checkIfCanFireFlash(date: date)
-            }, completion: nil)
-        } else {
-            checkIfCanFireFlash(date: Date())
+            if Reachability.isConnectedToNetwork() {
+                Clock.sync(from: "time.google.com", samples: 0, first: { (date, offset) in
+                    self.checkIfCanFireFlash(date: date)
+                }, completion: nil)
+            } else {
+                checkIfCanFireFlash(date: Date())
+            }
         }
     }
     
@@ -242,52 +246,38 @@ class ViewController: UIViewController {
         }
         let now = Date().millisecondsSince1970 % 100
         timeToWait -= now - before
-        let ff = date.millisecondsSince1970 + timeToWait
         print(timeToWait)
         
-        usleep(useconds_t(timeToWait * 1000))
+        //        usleep(useconds_t(timeToWait * 1000))
         
-        self.flashOn.toggle()
-        self.counter = 0
-        self.textCounter = 0
-//        self.recursionTextFlash()
-        self.recursionFlash()
-        /*
-        delay(bySeconds: Double(timeToWait) / 1000) {
-            self.flashOn.toggle()
-            self.counter = 0
-            self.textCounter = 0
-            print(Clock.now?.millisecondsSince1970)
-            self.recursionTextFlash()
-            self.recursionFlash()
+        fullCycleTimer = Timer.scheduledTimer(withTimeInterval: TimeInterval(Double(timeToWait) / 1000), repeats: false) { [weak self] (timer) in
+            guard let self = self else {return}
+            if self.flashOn {
+                print("First timer")
+                self.counter = 0
+                self.textCounter = 0
+                self.recursionTextFlash()
+                self.recursionFlash()
+            }
         }
- */
     }
     
-    func runFlast() {
+    func runFlash() {
         self.flashOn.toggle()
         self.counter = 0
         self.textCounter = 0
-//        self.recursionTextFlash()
+        self.recursionTextFlash()
         self.recursionFlash()
     }
     
     private func recursionFlash() {
         if flashOn, counter >= 0 {
-            /*
-            if counter == 0 {
-                print("first start: \(Clock.now?.millisecondsSince1970)")
-            }
- */
-            print("start: \(Clock.now?.millisecondsSince1970)")
             let timesArray = self.currentType == .liveBelarus ? liveBelarusTiming : changesTiming
             guard let state = timesArray[counter].state, let timing = timesArray[counter].time else {return}
             self.flash(on: state, forTime: timing) {
                 self.counter = self.counter == timesArray.count - 1 ? 0 : self.counter + 1
-                print("finish: \(Clock.now?.millisecondsSince1970)")
+                
                 if self.counter == 0, let date = Clock.now {
-//                    print(Clock.now?.millisecondsSince1970)
-                    self.flashOn.toggle()
                     self.checkIfCanFireFlash(date: date)
                     return
                 }
@@ -297,7 +287,7 @@ class ViewController: UIViewController {
     }
     private func recursionTextFlash() {
         if flashOn, textCounter >= 0 {
-            let textTimingArray = self.currentType == .liveBelarus ? textLiveTiming : textChangeTiming
+            let textTimingArray = self.currentType == .liveBelarus ? liveBelarusTiming : textChangeTiming
             guard let range = textTimingArray[textCounter].range, let timing = textTimingArray[textCounter].time else {return}
             self.flashText(range, forTime: timing) {
                 self.textCounter = self.textCounter == textTimingArray.count - 1 ? 0 : self.textCounter + 1
@@ -337,18 +327,22 @@ class ViewController: UIViewController {
             try device.lockForConfiguration()
             device.torchMode = on ? .on : .off
             if on {
-                UIDevice.vibrate()
+                DispatchQueue.main.async {
+                    UIDevice.vibrate()
+                }
             }
             device.unlockForConfiguration()
             
-            usleep(useconds_t(seconds * 1000 * 1000))
-            
-            completion?()
-            /*
-            delay(bySeconds: seconds) {
-                completion?()
+            loopTimer = Timer.scheduledTimer(withTimeInterval: seconds, repeats: false) { [weak self] (timer) in
+                guard let self = self else {return}
+                print("Second timer")
+                if self.flashOn {
+                    completion?()
+                }
+                
             }
- */
+            //            usleep(useconds_t(seconds * 1000 * 1000))
+            
         } catch {
             print("Torch could not be on")
         }
@@ -388,10 +382,10 @@ extension UIColor {
 }
 
 extension Date {
- var millisecondsSince1970:Int64 {
+    var millisecondsSince1970:Int64 {
         return Int64((self.timeIntervalSince1970 * 1000.0).rounded())
     }
-
+    
     init(milliseconds:Int) {
         self = Date(timeIntervalSince1970: TimeInterval(milliseconds / 1000))
     }
