@@ -220,8 +220,13 @@ class ViewController: UIViewController {
     }
     
     @IBAction func lightAction(_ sender: Any?) {
+        if flashOn {
+            self.flashOn.toggle()
+            return
+        }
         if Reachability.isConnectedToNetwork() {
             Clock.sync(from: "time.apple.com", samples: 0, first: { (date, offset) in
+                print(Clock.now?.millisecondsSince1970)
                 self.checkIfCanFireFlash(date: date)
             }, completion: nil)
         } else {
@@ -230,6 +235,7 @@ class ViewController: UIViewController {
     }
     
     func checkIfCanFireFlash(date: Date) {
+        print(Clock.now?.millisecondsSince1970)
         let before = Date().millisecondsSince1970 % 100
         let seconds = Calendar.current.component(.second, from: date)
         let miliseconds = date.millisecondsSince1970 % 1000
@@ -238,14 +244,28 @@ class ViewController: UIViewController {
             timeToWait += 1000
         }
         let now = Date().millisecondsSince1970 % 100
-        timeToWait -= now - before + 1
+        timeToWait -= now - before
+        let ff = date.millisecondsSince1970 + timeToWait
+        print(timeToWait)
+        
+        usleep(useconds_t(timeToWait * 1000))
+        
+        self.flashOn.toggle()
+        self.counter = 0
+        self.textCounter = 0
+        print(Clock.now?.millisecondsSince1970)
+        self.recursionTextFlash()
+        self.recursionFlash()
+        /*
         delay(bySeconds: Double(timeToWait) / 1000) {
             self.flashOn.toggle()
             self.counter = 0
             self.textCounter = 0
+            print(Clock.now?.millisecondsSince1970)
             self.recursionTextFlash()
             self.recursionFlash()
         }
+ */
     }
     
     func runFlast() {
