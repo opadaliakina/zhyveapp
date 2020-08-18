@@ -56,7 +56,7 @@ class ViewController: UIViewController {
         Timing(time: 0.15, state: true),
         Timing(time: 0.05, state: false),
         Timing(time: 0.2, state: true),
-        Timing(time: 0.3, state: false),
+        Timing(time: 0.1, state: false),
     ]
     
     let textLiveTiming: [Timing] = [
@@ -69,7 +69,7 @@ class ViewController: UIViewController {
         Timing(time: 0.15, range: NSRange(location: 7, length: 2)), // ЛА
         Timing(time: 0.05, range: NSRange(location: 0, length: 0)), // выкл
         Timing(time: 0.2, range: NSRange(location: 9, length: 5)), // РУСЬ!
-        Timing(time: 0.3, range: NSRange(location: 0, length: 0)) // выкл
+        Timing(time: 0.1, range: NSRange(location: 0, length: 0)) // выкл
     ]
     
     let textChangeTiming: [Timing] = [
@@ -179,7 +179,6 @@ class ViewController: UIViewController {
         }) { (completed) in
             
         }
-        
     }
     
     @objc func overlayTap() {
@@ -226,7 +225,6 @@ class ViewController: UIViewController {
         }
         if Reachability.isConnectedToNetwork() {
             Clock.sync(from: "time.apple.com", samples: 0, first: { (date, offset) in
-                print(Clock.now?.millisecondsSince1970)
                 self.checkIfCanFireFlash(date: date)
             }, completion: nil)
         } else {
@@ -235,7 +233,6 @@ class ViewController: UIViewController {
     }
     
     func checkIfCanFireFlash(date: Date) {
-        print(Clock.now?.millisecondsSince1970)
         let before = Date().millisecondsSince1970 % 100
         let seconds = Calendar.current.component(.second, from: date)
         let miliseconds = date.millisecondsSince1970 % 1000
@@ -253,7 +250,6 @@ class ViewController: UIViewController {
         self.flashOn.toggle()
         self.counter = 0
         self.textCounter = 0
-        print(Clock.now?.millisecondsSince1970)
         self.recursionTextFlash()
         self.recursionFlash()
         /*
@@ -278,10 +274,18 @@ class ViewController: UIViewController {
     
     private func recursionFlash() {
         if flashOn, counter >= 0 {
+            if counter == 0 {
+                print(Clock.now?.millisecondsSince1970)
+            }
             let timesArray = self.currentType == .liveBelarus ? liveBelarusTiming : changesTiming
             guard let state = timesArray[counter].state, let timing = timesArray[counter].time else {return}
             self.flash(on: state, forTime: timing) {
                 self.counter = self.counter == timesArray.count - 1 ? 0 : self.counter + 1
+                if self.counter == 0, let date = Clock.now {
+                    self.flashOn.toggle()
+                    self.checkIfCanFireFlash(date: date)
+                    return
+                }
                 self.recursionFlash()
             }
         }
@@ -292,6 +296,9 @@ class ViewController: UIViewController {
             guard let range = textTimingArray[textCounter].range, let timing = textTimingArray[textCounter].time else {return}
             self.flashText(range, forTime: timing) {
                 self.textCounter = self.textCounter == textTimingArray.count - 1 ? 0 : self.textCounter + 1
+                if self.textCounter == 0 {
+                    return
+                }
                 self.recursionTextFlash()
             }
         }
