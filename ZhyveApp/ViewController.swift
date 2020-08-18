@@ -47,29 +47,29 @@ class ViewController: UIViewController {
     var systemBrightness = CGFloat()
     
     let liveBelarusTiming: [Timing] = [
-        Timing(time: 0.3, state: false),
-        Timing(time: 0.5, state: true),
-        Timing(time: 0.1, state: false),
-        Timing(time: 0.45, state: true),
-        Timing(time: 0.200, state: false),
-        Timing(time: 0.25, state: true),
-        Timing(time: 0.1, state: false),
         Timing(time: 0.3, state: true),
-        Timing(time: 0.1, state: false),
-        Timing(time: 0.6, state: true),
+        Timing(time: 0.2, state: false),
+        Timing(time: 0.35, state: true),
+        Timing(time: 0.25, state: false),
+        Timing(time: 0.15, state: true),
+        Timing(time: 0.05, state: false),
+        Timing(time: 0.15, state: true),
+        Timing(time: 0.05, state: false),
+        Timing(time: 0.2, state: true),
+        Timing(time: 0.3, state: false),
     ]
     
     let textLiveTiming: [Timing] = [
-        Timing(time: 0.3, range: NSRange(location: 0, length: 0)), // выкл
-        Timing(time: 0.5, range: NSRange(location: 0, length: 2)), // ЖЫ
-        Timing(time: 0.1, range: NSRange(location: 0, length: 0)), // выкл
-        Timing(time: 0.45, range: NSRange(location: 2, length: 2)), // ВЕ
+        Timing(time: 0.3, range: NSRange(location: 0, length: 2)), // ЖЫ
         Timing(time: 0.2, range: NSRange(location: 0, length: 0)), // выкл
-        Timing(time: 0.25, range: NSRange(location: 5, length: 2)), // _БЕ
-        Timing(time: 0.1, range: NSRange(location: 0, length: 0)), // выкл
-        Timing(time: 0.3, range: NSRange(location: 7, length: 2)), // ЛА
-        Timing(time: 0.1, range: NSRange(location: 0, length: 0)), // выкл
-        Timing(time: 0.6, range: NSRange(location: 9, length: 5)) // РУСЬ!
+        Timing(time: 0.35, range: NSRange(location: 2, length: 2)), // ВЕ
+        Timing(time: 0.25, range: NSRange(location: 0, length: 0)), // выкл
+        Timing(time: 0.15, range: NSRange(location: 5, length: 2)), // _БЕ
+        Timing(time: 0.05, range: NSRange(location: 0, length: 0)), // выкл
+        Timing(time: 0.15, range: NSRange(location: 7, length: 2)), // ЛА
+        Timing(time: 0.05, range: NSRange(location: 0, length: 0)), // выкл
+        Timing(time: 0.2, range: NSRange(location: 9, length: 5)), // РУСЬ!
+        Timing(time: 0.3, range: NSRange(location: 0, length: 0)) // выкл
     ]
     
     let textChangeTiming: [Timing] = [
@@ -230,20 +230,30 @@ class ViewController: UIViewController {
     }
     
     func checkIfCanFireFlash(date: Date) {
+        let before = Date().millisecondsSince1970 % 100
         let seconds = Calendar.current.component(.second, from: date)
-        if seconds %  2 != 0 {
-            print("scheduled")
-            Timer.scheduledTimer(timeInterval: 0.5, target: self,
-                                 selector: #selector(self.lightAction(_:)),
-                                 userInfo: nil, repeats: false)
-            return
+        let miliseconds = date.millisecondsSince1970 % 1000
+        var timeToWait: Int64 = 1000 - miliseconds
+        if seconds % 2 == 0 {
+            timeToWait += 1000
         }
-        print(Clock.now)
-        flashOn.toggle()
-        counter = 0
-        textCounter = 0
-        recursionTextFlash()
-        recursionFlash()
+        let now = Date().millisecondsSince1970 % 100
+        timeToWait -= now - before + 1
+        delay(bySeconds: Double(timeToWait) / 1000) {
+            self.flashOn.toggle()
+            self.counter = 0
+            self.textCounter = 0
+            self.recursionTextFlash()
+            self.recursionFlash()
+        }
+    }
+    
+    func runFlast() {
+        self.flashOn.toggle()
+        self.counter = 0
+        self.textCounter = 0
+        self.recursionTextFlash()
+        self.recursionFlash()
     }
     
     private func recursionFlash() {
@@ -337,4 +347,14 @@ extension UIColor {
     static var blackText: UIColor { return UIColor(hex: 0x1C1C1C) }
     
     static var greyText: UIColor { return UIColor(hex: 0x686868) }
+}
+
+extension Date {
+ var millisecondsSince1970:Int64 {
+        return Int64((self.timeIntervalSince1970 * 1000.0).rounded())
+    }
+
+    init(milliseconds:Int) {
+        self = Date(timeIntervalSince1970: TimeInterval(milliseconds / 1000))
+    }
 }
