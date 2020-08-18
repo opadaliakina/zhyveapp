@@ -47,16 +47,16 @@ class ViewController: UIViewController {
     var systemBrightness = CGFloat()
     
     let liveBelarusTiming: [Timing] = [
+        Timing(time: 0.35, state: true),
+        Timing(time: 0.075, state: false),
         Timing(time: 0.3, state: true),
         Timing(time: 0.2, state: false),
-        Timing(time: 0.35, state: true),
-        Timing(time: 0.25, state: false),
         Timing(time: 0.15, state: true),
-        Timing(time: 0.05, state: false),
+        Timing(time: 0.075, state: false),
         Timing(time: 0.15, state: true),
-        Timing(time: 0.05, state: false),
-        Timing(time: 0.2, state: true),
-        Timing(time: 0.1, state: false),
+        Timing(time: 0.075, state: false),
+        Timing(time: 0.15, state: true),
+        Timing(time: 0.075, state: false),
     ]
     
     let textLiveTiming: [Timing] = [
@@ -69,7 +69,7 @@ class ViewController: UIViewController {
         Timing(time: 0.15, range: NSRange(location: 7, length: 2)), // ЛА
         Timing(time: 0.05, range: NSRange(location: 0, length: 0)), // выкл
         Timing(time: 0.2, range: NSRange(location: 9, length: 5)), // РУСЬ!
-        Timing(time: 0.1, range: NSRange(location: 0, length: 0)) // выкл
+        Timing(time: 0.2, range: NSRange(location: 0, length: 0)) // выкл
     ]
     
     let textChangeTiming: [Timing] = [
@@ -224,7 +224,7 @@ class ViewController: UIViewController {
             return
         }
         if Reachability.isConnectedToNetwork() {
-            Clock.sync(from: "time.apple.com", samples: 0, first: { (date, offset) in
+            Clock.sync(from: "time.google.com", samples: 0, first: { (date, offset) in
                 self.checkIfCanFireFlash(date: date)
             }, completion: nil)
         } else {
@@ -250,7 +250,7 @@ class ViewController: UIViewController {
         self.flashOn.toggle()
         self.counter = 0
         self.textCounter = 0
-        self.recursionTextFlash()
+//        self.recursionTextFlash()
         self.recursionFlash()
         /*
         delay(bySeconds: Double(timeToWait) / 1000) {
@@ -268,20 +268,25 @@ class ViewController: UIViewController {
         self.flashOn.toggle()
         self.counter = 0
         self.textCounter = 0
-        self.recursionTextFlash()
+//        self.recursionTextFlash()
         self.recursionFlash()
     }
     
     private func recursionFlash() {
         if flashOn, counter >= 0 {
+            /*
             if counter == 0 {
-                print(Clock.now?.millisecondsSince1970)
+                print("first start: \(Clock.now?.millisecondsSince1970)")
             }
+ */
+            print("start: \(Clock.now?.millisecondsSince1970)")
             let timesArray = self.currentType == .liveBelarus ? liveBelarusTiming : changesTiming
             guard let state = timesArray[counter].state, let timing = timesArray[counter].time else {return}
             self.flash(on: state, forTime: timing) {
                 self.counter = self.counter == timesArray.count - 1 ? 0 : self.counter + 1
+                print("finish: \(Clock.now?.millisecondsSince1970)")
                 if self.counter == 0, let date = Clock.now {
+//                    print(Clock.now?.millisecondsSince1970)
                     self.flashOn.toggle()
                     self.checkIfCanFireFlash(date: date)
                     return
@@ -335,9 +340,15 @@ class ViewController: UIViewController {
                 UIDevice.vibrate()
             }
             device.unlockForConfiguration()
+            
+            usleep(useconds_t(seconds * 1000 * 1000))
+            
+            completion?()
+            /*
             delay(bySeconds: seconds) {
                 completion?()
             }
+ */
         } catch {
             print("Torch could not be on")
         }
