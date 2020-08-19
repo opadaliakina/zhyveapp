@@ -132,16 +132,6 @@ class ViewController: UIViewController {
         lightButton.layer.insertSublayer(shadowLayer, at: 0)
     }
     
-    func makeButtonUI(_ button: UIButton) {
-        button.backgroundColor = UIColor.white
-        button.layer.masksToBounds = false
-        button.layer.shadowColor = UIColor.black.cgColor
-        button.layer.shadowRadius = 10
-        button.layer.shadowOpacity = 0.1
-        button.layer.cornerRadius = 22
-        button.layer.shadowOffset = CGSize(width: 4, height: 4)
-    }
-    
     func changeUI() {
         view.backgroundColor = currentType == .liveBelarus ? .white : .redBack
         mainTextLabel.text = currentType == .liveBelarus ? "Жыве Беларусь!" : "Перамен!"
@@ -190,7 +180,12 @@ class ViewController: UIViewController {
         burgerButton.alpha == 1 ? hideTopButtons(true) : hideTopButtons(false)
     }
     
-    // MARK: -
+    // MARK: - Actions
+    
+    @IBAction func showSettings(_ sender: Any) {
+        flashOn = false
+        performSegue(withIdentifier: "showInfo", sender: nil)
+    }
     
     @IBAction func phoneAction(_ sender: Any?) {
         flashOn = false

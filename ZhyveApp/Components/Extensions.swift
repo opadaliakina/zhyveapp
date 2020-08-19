@@ -10,6 +10,20 @@ import Foundation
 import UIKit
 
 
+public extension UIViewController {
+    
+    func makeButtonUI(_ button: UIButton) {
+        button.backgroundColor = UIColor.white
+        button.layer.masksToBounds = false
+        button.layer.shadowColor = UIColor.black.cgColor
+        button.layer.shadowRadius = 10
+        button.layer.shadowOpacity = 0.1
+        button.layer.cornerRadius = 22
+        button.layer.shadowOffset = CGSize(width: 4, height: 4)
+    }
+}
+
+
 public extension UIDevice {
     
     static func vibrate() {
@@ -17,7 +31,7 @@ public extension UIDevice {
             if #available(iOS 10.0, *) {
                 let generator = UIImpactFeedbackGenerator(style: .light)
                 if #available(iOS 13.0, *) {
-                    generator.impactOccurred(intensity: 0.7)
+                    generator.impactOccurred(intensity: 1)
                 } else {
                     // for ios 12 and lower
                     generator.impactOccurred()
