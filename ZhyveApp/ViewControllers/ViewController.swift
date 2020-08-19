@@ -29,6 +29,8 @@ class ViewController: UIViewController {
     @IBOutlet weak var swipeView: UIView!
     @IBOutlet weak var overlay: UIView!
     
+    @IBOutlet weak var mainLabelBottomConstraint: NSLayoutConstraint!
+    
     var currentType: ScopeType = .liveBelarus
     var flashOn = false {
         didSet {
@@ -91,6 +93,9 @@ class ViewController: UIViewController {
         //        swipeView.addGestureRecognizer(swipeRight)
         let overlayTapRecognizer = UITapGestureRecognizer(target: self, action: #selector(overlayTap))
         overlay.addGestureRecognizer(overlayTapRecognizer)
+        if isSmallIPhone() {
+            mainLabelBottomConstraint.constant = 50
+        }
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
@@ -156,8 +161,20 @@ class ViewController: UIViewController {
     func mainLabelTextAligment() {
         switch UIApplication.shared.statusBarOrientation {
         case .landscapeLeft,.landscapeRight:
+            if isSmallIPhone() {
+                mainLabelBottomConstraint.constant = 16
+            }
+            if isIphone6() {
+                mainLabelBottomConstraint.constant = 50
+            }
             self.mainTextLabel.textAlignment = .center
         case .portrait, .portraitUpsideDown,.unknown:
+            if isSmallIPhone() || isIphone6()  {
+                mainLabelBottomConstraint.constant = 50
+            }
+            if isIphone6() {
+                mainLabelBottomConstraint.constant = 100
+            }
             self.mainTextLabel.textAlignment = .left
         }
     }

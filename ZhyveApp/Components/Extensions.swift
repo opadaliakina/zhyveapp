@@ -8,7 +8,7 @@
 
 import Foundation
 import UIKit
-
+import CoreHaptics
 
 public extension UIViewController {
     
@@ -22,7 +22,6 @@ public extension UIViewController {
         button.layer.shadowOffset = CGSize(width: 4, height: 4)
     }
 }
-
 
 public extension UIDevice {
     
@@ -68,13 +67,51 @@ public extension UIDevice {
         }
     }
     
+    static var modelIdentifier: String {
+        var sysinfo = utsname()
+        uname(&sysinfo) // ignore return value
+        return String(bytes: Data(bytes: &sysinfo.machine, count: Int(_SYS_NAMELEN)), encoding: .ascii)!.trimmingCharacters(in: .controlCharacters)
+    }
+    
     static var isHapticsSupported : Bool {
-        if #available(iOS 10.0, *) {
-            let feedback = UIImpactFeedbackGenerator(style: .heavy)
-            feedback.prepare()
-            return feedback.description.hasSuffix("Heavy>")
+        if #available(iOS 13.0, *) {
+            let hapticCapability = CHHapticEngine.capabilitiesForHardware()
+            let supportsHaptics = hapticCapability.supportsHaptics
+            return supportsHaptics
         } else {
+            // assuming that iPads and iPods don't have a Taptic Engine
+            if !modelIdentifier.contains("iPhone") {
+                return false
+            }
+            
+            // e.g. will equal to "9,5" for "iPhone9,5"
+            let subString = String(modelIdentifier[modelIdentifier.index(modelIdentifier.startIndex, offsetBy: 6)..<modelIdentifier.endIndex])
+            
+            // will return true if the generationNumber is equal to or greater than 9
+            if let generationNumberString = subString.components(separatedBy: ",").first,
+                let generationNumber = Int(generationNumberString),
+                generationNumber >= 9 {
+                return true
+            }
             return false
         }
+    }
+}
+
+public func isSmallIPhone() -> Bool {
+    switch UIScreen.main.nativeBounds.height {
+    case 1136:
+        return true
+    default:
+        return false
+    }
+}
+
+public func isIphone6() -> Bool {
+    switch UIScreen.main.nativeBounds.height {
+    case 1334:
+        return true
+    default:
+        return false
     }
 }

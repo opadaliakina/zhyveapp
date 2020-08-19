@@ -12,7 +12,7 @@ class InfoController: UIViewController {
     
     @IBOutlet weak var closeButton: UIButton!
     @IBOutlet weak var topView: UIView!
-    
+    @IBOutlet weak var settingsButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,6 +23,7 @@ class InfoController: UIViewController {
         super.viewWillAppear(animated)
         makeButtonUI(closeButton)
         topViewUI()
+        settingsButton.isHidden = !UIDevice.isHapticsSupported
     }
     
     

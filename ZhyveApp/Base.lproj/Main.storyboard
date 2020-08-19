@@ -16,7 +16,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Жыве Беларусь!" lineBreakMode="tailTruncation" numberOfLines="2" minimumScaleFactor="0.69999999999999996" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ccI-mr-CiH">
-                                <rect key="frame" x="32" y="382" width="350" height="172"/>
+                                <rect key="frame" x="32" y="398" width="350" height="172"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="72"/>
                                 <color key="textColor" red="0.10980392156862745" green="0.10980392156862745" blue="0.10980392156862745" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -35,10 +35,10 @@
                                 </connections>
                             </button>
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yMV-IR-fyl">
-                                <rect key="frame" x="0.0" y="570" width="414" height="200"/>
+                                <rect key="frame" x="44" y="188" width="808" height="100"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="c3H-rG-BYv">
-                                        <rect key="frame" x="103" y="91" width="208" height="18"/>
+                                        <rect key="frame" x="300" y="41" width="208" height="18"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="arrow" translatesAutoresizingMaskIntoConstraints="NO" id="pFx-Gy-M4F">
                                                 <rect key="frame" x="0.0" y="0.0" width="22.5" height="18"/>
@@ -112,6 +112,10 @@
                             <constraint firstItem="3pl-F8-nly" firstAttribute="top" secondItem="yMV-IR-fyl" secondAttribute="bottom" id="EUS-5f-h48"/>
                             <constraint firstItem="3pl-F8-nly" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="EcH-CN-d0P"/>
                             <constraint firstAttribute="trailing" secondItem="nce-6d-aQM" secondAttribute="trailing" id="IPv-Im-Vkt"/>
+                            <constraint firstItem="3pl-F8-nly" firstAttribute="top" secondItem="ccI-mr-CiH" secondAttribute="bottom" constant="100" id="QgG-TM-OYv">
+                                <variation key="heightClass=compact-widthClass=regular" constant="100"/>
+                                <variation key="heightClass=regular-widthClass=compact" constant="200"/>
+                            </constraint>
                             <constraint firstItem="rRL-04-heM" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="69" id="V0N-hw-nSY"/>
                             <constraint firstItem="yMV-IR-fyl" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="Vac-zk-cYw"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="lcI-xH-Y4z" secondAttribute="trailing" constant="32" id="YKz-vD-CIe"/>
@@ -126,6 +130,9 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <variation key="default">
+                            <mask key="subviews">
+                                <exclude reference="yMV-IR-fyl"/>
+                            </mask>
                             <mask key="constraints">
                                 <exclude reference="Dzu-lZ-IGg"/>
                                 <exclude reference="3pp-VV-C44"/>
@@ -153,6 +160,7 @@
                     <connections>
                         <outlet property="burgerButton" destination="rRL-04-heM" id="Uy8-Vt-b2W"/>
                         <outlet property="lightButton" destination="3pl-F8-nly" id="38W-NM-FQX"/>
+                        <outlet property="mainLabelBottomConstraint" destination="QgG-TM-OYv" id="vll-J8-rpW"/>
                         <outlet property="mainTextLabel" destination="ccI-mr-CiH" id="yQ8-l4-ElI"/>
                         <outlet property="overlay" destination="nce-6d-aQM" id="mmn-af-1wA"/>
                         <outlet property="phoneButtton" destination="lcI-xH-Y4z" id="9Zu-uZ-SCo"/>
@@ -242,6 +250,7 @@
                     <navigationItem key="navigationItem" id="Fpi-dT-ndf"/>
                     <connections>
                         <outlet property="closeButton" destination="onC-aP-f7n" id="Qeb-sy-Fz6"/>
+                        <outlet property="settingsButton" destination="ufC-dV-kSe" id="W0o-7z-0qN"/>
                         <outlet property="topView" destination="I76-Rl-M3V" id="GJH-ok-FK2"/>
                         <segue destination="pL8-x5-el5" kind="show" identifier="showSettings" id="QkZ-Jc-gtv"/>
                     </connections>
@@ -288,7 +297,7 @@
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Тэлефон вібруе ў такт успышкам" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rjP-wq-mPx">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Тэлефон вібруе ў такт успышкам" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.59999999999999998" translatesAutoresizingMaskIntoConstraints="NO" id="rjP-wq-mPx">
                                                 <rect key="frame" x="0.0" y="30" width="222.5" height="17"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <color key="textColor" red="0.40784313725490196" green="0.40784313725490196" blue="0.40784313725490196" alpha="1" colorSpace="calibratedRGB"/>
