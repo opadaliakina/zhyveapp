@@ -190,13 +190,15 @@
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="DRU-jo-4af" firstAttribute="top" secondItem="I76-Rl-M3V" secondAttribute="top" constant="73" id="2Bm-LA-bKs"/>
-                                    <constraint firstItem="uQM-7j-VDM" firstAttribute="centerX" secondItem="I76-Rl-M3V" secondAttribute="centerX" id="8RE-N0-z1o"/>
                                     <constraint firstAttribute="trailing" secondItem="uQM-7j-VDM" secondAttribute="trailing" constant="53" id="9qx-AN-gSI"/>
                                     <constraint firstAttribute="trailing" secondItem="DRU-jo-4af" secondAttribute="trailing" constant="32" id="QK8-OT-M06"/>
                                     <constraint firstItem="uQM-7j-VDM" firstAttribute="leading" secondItem="I76-Rl-M3V" secondAttribute="leading" constant="53" id="U3m-Nx-5gt"/>
                                     <constraint firstItem="DRU-jo-4af" firstAttribute="leading" secondItem="I76-Rl-M3V" secondAttribute="leading" constant="32" id="a38-nl-mdX"/>
                                     <constraint firstItem="uQM-7j-VDM" firstAttribute="top" secondItem="DRU-jo-4af" secondAttribute="bottom" constant="42" id="bxs-rV-ZgN"/>
-                                    <constraint firstAttribute="height" constant="260" id="zlo-Tj-Ff9"/>
+                                    <constraint firstAttribute="height" constant="200" id="zlo-Tj-Ff9">
+                                        <variation key="heightClass=compact-widthClass=regular" constant="200"/>
+                                        <variation key="heightClass=regular-widthClass=compact" constant="260"/>
+                                    </constraint>
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="onC-aP-f7n">
