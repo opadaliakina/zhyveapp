@@ -31,6 +31,8 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var mainLabelBottomConstraint: NSLayoutConstraint!
     
+    var spinner = SpinnerView()
+    
     var currentType: ScopeType = .liveBelarus
     var flashOn = false {
         didSet {
@@ -117,7 +119,10 @@ class ViewController: UIViewController {
         coordinator.animateAlongsideTransition(in: self.view, animation: { [weak self] (context) in
             guard let self = self else {return}
             self.mainLabelTextAligment()
-            
+            if !self.spinner.isHidden {
+                self.spinner.center.x = self.view.center.x
+                self.spinner.center.y = self.lightButton.center.y
+            }
         }) { (completionContext) in
             print(self.mainTextLabel.textAlignment.rawValue)
         }
@@ -197,6 +202,20 @@ class ViewController: UIViewController {
         burgerButton.alpha == 1 ? hideTopButtons(true) : hideTopButtons(false)
     }
     
+    func addSpinner() {
+        spinner = SpinnerView(frame: CGRect(x: 0, y: 0, width: 44, height: 44))
+        self.view.addSubview(spinner)
+        spinner.center.x = self.view.center.x
+        spinner.center.y = self.lightButton.center.y
+        self.lightButton.setTitle(" ", for: .normal)
+        self.spinner.animate()
+    }
+    
+    func removeSpinner() {
+        lightButton.setTitle(flashOn ? "Спынiць!" : "Святло!", for: .normal)
+        self.spinner.removeFromSuperview()
+    }
+    
     // MARK: - Actions
     
     @IBAction func showSettings(_ sender: Any) {
@@ -237,7 +256,9 @@ class ViewController: UIViewController {
     
     @IBAction func lightAction(_ sender: Any?) {
         self.flashOn.toggle()
+        
         if flashOn {
+            addSpinner()
             if Reachability.isConnectedToNetwork() {
                 Clock.sync(from: "time.google.com", samples: 0, first: { (date, offset) in
                     self.checkIfCanFireFlash(date: date)
@@ -265,6 +286,7 @@ class ViewController: UIViewController {
         fullCycleTimer = Timer.scheduledTimer(withTimeInterval: TimeInterval(Double(timeToWait) / 1000), repeats: false) { [weak self] (timer) in
             guard let self = self else {return}
             if self.flashOn {
+                self.removeSpinner()
                 print("First timer")
                 self.counter = 0
                 self.textCounter = 0

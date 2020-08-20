@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		2F188C8A24ED183F0011BED3 /* InfoController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F188C8924ED183F0011BED3 /* InfoController.swift */; };
 		2F188C8D24ED262B0011BED3 /* SettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F188C8C24ED262B0011BED3 /* SettingsController.swift */; };
+		2FC12F4B24ED5A61000539B8 /* SpinnerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC12F4A24ED5A61000539B8 /* SpinnerView.swift */; };
 		2FF96D3A24E866F6007E6420 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FF96D3924E866F6007E6420 /* Extensions.swift */; };
 		2FF96D3C24E86718007E6420 /* UserSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FF96D3B24E86718007E6420 /* UserSettings.swift */; };
 		BF4FD17524EABE7A0040E67E /* Data+Bytes.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF4FD16B24EABE7A0040E67E /* Data+Bytes.swift */; };
@@ -32,6 +33,7 @@
 /* Begin PBXFileReference section */
 		2F188C8924ED183F0011BED3 /* InfoController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoController.swift; sourceTree = "<group>"; };
 		2F188C8C24ED262B0011BED3 /* SettingsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsController.swift; sourceTree = "<group>"; };
+		2FC12F4A24ED5A61000539B8 /* SpinnerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpinnerView.swift; sourceTree = "<group>"; };
 		2FF96D3924E866F6007E6420 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		2FF96D3B24E86718007E6420 /* UserSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSettings.swift; sourceTree = "<group>"; };
 		BF4FD16B24EABE7A0040E67E /* Data+Bytes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Data+Bytes.swift"; sourceTree = "<group>"; };
@@ -73,6 +75,14 @@
 				2F188C8C24ED262B0011BED3 /* SettingsController.swift */,
 			);
 			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		2FC12F4C24ED5B95000539B8 /* Customs */ = {
+			isa = PBXGroup;
+			children = (
+				2FC12F4A24ED5A61000539B8 /* SpinnerView.swift */,
+			);
+			path = Customs;
 			sourceTree = "<group>";
 		};
 		2FF96D3D24E867C0007E6420 /* Components */ = {
@@ -124,6 +134,7 @@
 				BF627B2E24E7D54E00021F2B /* AppDelegate.swift */,
 				2F188C8B24ED18450011BED3 /* ViewControllers */,
 				BF4FD17F24EAC3060040E67E /* Reachability.swift */,
+				2FC12F4C24ED5B95000539B8 /* Customs */,
 				2FF96D3D24E867C0007E6420 /* Components */,
 				BF627B3424E7D54E00021F2B /* Main.storyboard */,
 				BF627B3724E7D55100021F2B /* Assets.xcassets */,
@@ -214,6 +225,7 @@
 				BF4FD17924EABE7A0040E67E /* Clock.swift in Sources */,
 				BF4FD17824EABE7A0040E67E /* NTPClient.swift in Sources */,
 				2F188C8A24ED183F0011BED3 /* InfoController.swift in Sources */,
+				2FC12F4B24ED5A61000539B8 /* SpinnerView.swift in Sources */,
 				BF4FD18024EAC3060040E67E /* Reachability.swift in Sources */,
 				BF4FD17724EABE7A0040E67E /* DNSResolver.swift in Sources */,
 				BF4FD17524EABE7A0040E67E /* Data+Bytes.swift in Sources */,
