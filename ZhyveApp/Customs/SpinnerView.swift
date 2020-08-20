@@ -33,7 +33,7 @@ class SpinnerView: UIView {
         spinningCircle.fillColor = UIColor.clear.cgColor
         spinningCircle.strokeColor = UIColor.init(hex: 0xE81E1E).cgColor
         spinningCircle.lineWidth = 5
-        spinningCircle.strokeEnd = 0.25
+        spinningCircle.strokeEnd = 0.1
         spinningCircle.lineCap = .round
         
         self.layer.addSublayer(spinningCircle)
@@ -52,7 +52,6 @@ class SpinnerView: UIView {
     
     private func animateDraw() {
         let animation = CABasicAnimation(keyPath: "strokeEnd")
-        
         animation.fromValue = 0.1
         animation.toValue = 0.8
         animation.duration = 1.5
