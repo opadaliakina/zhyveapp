@@ -91,6 +91,8 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+
+        
         //        let swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(respondToSwipeGesture(gesture:)))
         //        swipeView.addGestureRecognizer(swipeRight)
         let overlayTapRecognizer = UITapGestureRecognizer(target: self, action: #selector(overlayTap))
@@ -104,6 +106,10 @@ class ViewController: UIViewController {
         return .darkContent
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
@@ -111,6 +117,10 @@ class ViewController: UIViewController {
         makeButtonUI(burgerButton)
         makeButtonUI(lightButton)
         mainLabelTextAligment()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
     }
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {

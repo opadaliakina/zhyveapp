@@ -10,7 +10,7 @@
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="ZhyveApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="firstController" id="BYZ-38-t0r" customClass="ViewController" customModule="ZhyveApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -358,6 +358,55 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pv5-7D-zF3" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1842" y="138"/>
+        </scene>
+        <!--Onboarding Controller-->
+        <scene sceneID="jtf-ST-EPH">
+            <objects>
+                <viewController storyboardIdentifier="onboardingController" modalTransitionStyle="crossDissolve" modalPresentationStyle="fullScreen" id="6ZC-K0-SKN" customClass="OnboardingController" customModule="ZhyveApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="1lY-sb-g22">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZSD-rP-qS6">
+                                <rect key="frame" x="0.0" y="811" width="414" height="41"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                <state key="normal" title="Далей">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="nextButton:" destination="6ZC-K0-SKN" eventType="touchUpInside" id="aQ8-SW-BiP"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Адзіны рытм усёй краіны" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SYb-pZ-KUe">
+                                <rect key="frame" x="32" y="642" width="350" height="96"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="96" id="FOm-gm-MkE"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="40"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" red="0.90980392156862744" green="0.11764705882352941" blue="0.11764705882352941" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="ZSD-rP-qS6" firstAttribute="top" secondItem="SYb-pZ-KUe" secondAttribute="bottom" constant="73" id="DIK-lt-rBA"/>
+                            <constraint firstItem="SYb-pZ-KUe" firstAttribute="leading" secondItem="1lY-sb-g22" secondAttribute="leading" constant="32" id="e2V-hv-0KJ"/>
+                            <constraint firstAttribute="bottom" secondItem="ZSD-rP-qS6" secondAttribute="bottom" constant="44" id="fTd-vM-Ood"/>
+                            <constraint firstAttribute="trailing" secondItem="SYb-pZ-KUe" secondAttribute="trailing" constant="32" id="fm9-VP-Fdx"/>
+                            <constraint firstItem="ZSD-rP-qS6" firstAttribute="leading" secondItem="wBv-ub-HnF" secondAttribute="leading" id="iTb-LW-bp2"/>
+                            <constraint firstItem="wBv-ub-HnF" firstAttribute="trailing" secondItem="ZSD-rP-qS6" secondAttribute="trailing" id="x1j-5l-Tec"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="wBv-ub-HnF"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="Na0-sz-f4z"/>
+                    <connections>
+                        <outlet property="textLabel" destination="SYb-pZ-KUe" id="DOH-T2-mzu"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="gJI-ZP-dYd" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1054" y="-547"/>
         </scene>
     </scenes>
     <resources>
