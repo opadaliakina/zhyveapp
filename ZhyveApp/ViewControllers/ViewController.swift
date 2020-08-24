@@ -31,7 +31,7 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var mainLabelBottomConstraint: NSLayoutConstraint!
     
-    var spinner = SpinnerView()
+    var spinner: SpinnerView?
     
     var currentType: ScopeType = .liveBelarus
     var flashOn = false {
@@ -129,9 +129,9 @@ class ViewController: UIViewController {
         coordinator.animateAlongsideTransition(in: self.view, animation: { [weak self] (context) in
             guard let self = self else {return}
             self.mainLabelTextAligment()
-            if !self.spinner.isHidden {
-                self.spinner.center.x = self.view.center.x
-                self.spinner.center.y = self.lightButton.center.y
+            if let spinner = self.spinner, !spinner.isHidden {
+                self.spinner?.center.x = self.view.center.x
+                self.spinner?.center.y = self.lightButton.center.y
             }
         }) { (completionContext) in
             print(self.mainTextLabel.textAlignment.rawValue)
@@ -214,16 +214,20 @@ class ViewController: UIViewController {
     
     func addSpinner() {
         spinner = SpinnerView(frame: CGRect(x: 0, y: 0, width: 44, height: 44))
-        self.view.addSubview(spinner)
-        spinner.center.x = self.view.center.x
-        spinner.center.y = self.lightButton.center.y
-        self.lightButton.setTitle(" ", for: .normal)
-        self.spinner.animate()
+        if let spinner = spinner {
+            self.view.addSubview(spinner)
+            spinner.center.x = self.view.center.x
+            spinner.center.y = self.lightButton.center.y
+            self.lightButton.setTitle(" ", for: .normal)
+            self.spinner?.animate()
+        }
     }
     
     func removeSpinner() {
         lightButton.setTitle(flashOn ? "Спынiць!" : "Святло!", for: .normal)
-        self.spinner.removeFromSuperview()
+        self.spinner?.removeFromSuperview()
+        self.spinner?.removeAnimation()
+        self.spinner = nil
     }
     
     // MARK: - Actions
@@ -266,7 +270,7 @@ class ViewController: UIViewController {
     
     @IBAction func lightAction(_ sender: Any?) {
         self.flashOn.toggle()
-        
+        removeSpinner()
         if flashOn {
             addSpinner()
             if Reachability.isConnectedToNetwork() {
@@ -292,6 +296,23 @@ class ViewController: UIViewController {
         print(timeToWait)
         
         //        usleep(useconds_t(timeToWait * 1000))
+        var completionTime = Int64()
+        switch timeToWait {
+        case 0...200:
+            completionTime = 100
+        case 200...800:
+            completionTime = 300
+        default:
+            completionTime = 500
+        }
+            
+        _ = Timer.scheduledTimer(withTimeInterval: TimeInterval(Double(timeToWait - completionTime) / 1000), repeats: false) { [weak self] (timer) in
+            guard let self = self else {return}
+            if self.flashOn {
+                print("circle complited")
+                self.spinner?.completeCircle(forTime: CFTimeInterval(completionTime))
+            }
+        }
         
         fullCycleTimer = Timer.scheduledTimer(withTimeInterval: TimeInterval(Double(timeToWait) / 1000), repeats: false) { [weak self] (timer) in
             guard let self = self else {return}
