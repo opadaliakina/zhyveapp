@@ -102,7 +102,9 @@ class ViewController: UIViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
+        if segue.identifier == "showFlag" {
+          self.flashOn = false
+        }
     }
     
     override var supportedInterfaceOrientations: UIInterfaceOrientationMask {

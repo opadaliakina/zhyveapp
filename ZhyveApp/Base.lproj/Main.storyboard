@@ -86,7 +86,7 @@
                                 </constraints>
                                 <state key="normal" image="phone_white"/>
                                 <connections>
-                                    <segue destination="vCV-Kv-o1d" kind="show" id="c6r-n3-FoN"/>
+                                    <segue destination="vCV-Kv-o1d" kind="show" identifier="showFlag" id="c6r-n3-FoN"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rRL-04-heM">
@@ -468,7 +468,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="tqj-Dq-qLB"/>
+        <segue reference="cWj-Fa-YVq"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="arrow" width="22.5" height="8"/>
