@@ -22,9 +22,6 @@ class SpinnerView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    deinit {
-        print ("spinner deinit")
-    }
     
     private func configure(frame: CGRect) {
         

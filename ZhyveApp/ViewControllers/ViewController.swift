@@ -233,7 +233,7 @@ class ViewController: UIViewController {
         _ = Timer.scheduledTimer(withTimeInterval: TimeInterval(Double(timeToWait - completionTime) / 1000), repeats: false) { [weak self] (timer) in
             guard let self = self else {return}
             if self.flashOn {
-                print("circle complited")
+//                print("circle complited")
                 self.spinner?.completeCircle(forTime: CFTimeInterval(completionTime))
             }
         }
@@ -258,14 +258,15 @@ class ViewController: UIViewController {
             self.flash(on: state, forTime: timing) {
                 self.counter = self.counter == timesArray.count - 1 ? 0 : self.counter + 1
                 
-                if self.counter == 0, let date = Clock.now {
-                    self.checkIfCanFireFlash(date: date)
+                if self.counter == 0 {
+                    self.checkIfCanFireFlash(date: Clock.now ?? Date())
                     return
                 }
                 self.recursionFlash()
             }
         }
     }
+    
     private func recursionTextFlash() {
         if flashOn, textCounter >= 0 {
             let textTimingArray = self.currentType == .liveBelarus ? liveBelarusTiming : textChangeTiming
@@ -294,9 +295,13 @@ class ViewController: UIViewController {
             attributed.addAttribute(.foregroundColor, value: UIColor.blackText, range: NSMakeRange(0, range.location))
         }
         self.mainTextLabel.attributedText = attributed
+        print("....")
         print("flash text")
-        self.delay(bySeconds: seconds) {
-            completion?()
+        _ = Timer.scheduledTimer(withTimeInterval: seconds, repeats: false) { [weak self] (timer) in
+            guard let self = self else {return}
+            if self.flashOn {
+                completion?()
+            }
         }
     }
     
