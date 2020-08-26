@@ -23,6 +23,10 @@ class SettingsController: UIViewController {
         makeButtonUI(backButton)
     }
     
+    override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
+        return .portrait
+    }
+    
     @IBAction func switchVibration(_ sender: UISwitch) {
         UserSettings.setAllowVibration(sender.isOn)
     }

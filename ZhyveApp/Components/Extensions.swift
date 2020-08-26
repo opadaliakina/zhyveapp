@@ -98,20 +98,47 @@ public extension UIDevice {
     }
 }
 
-public func isSmallIPhone() -> Bool {
-    switch UIScreen.main.nativeBounds.height {
-    case 1136:
-        return true
-    default:
-        return false
-    }
-}
-
 public func isIphone6() -> Bool {
     switch UIScreen.main.nativeBounds.height {
     case 1334:
         return true
     default:
         return false
+    }
+}
+
+extension UIColor {
+    
+    convenience init(red: Int, green: Int, blue: Int, alpha: Float = 1.0) {
+        assert(red >= 0 && red <= 255, "Invalid red component")
+        assert(green >= 0 && green <= 255, "Invalid green component")
+        assert(blue >= 0 && blue <= 255, "Invalid blue component")
+        
+        self.init(red: CGFloat(red) / 255.0, green: CGFloat(green) / 255.0, blue: CGFloat(blue) / 255.0, alpha: CGFloat(alpha))
+    }
+    
+    convenience init(hex: Int, alpha: Float = 1.0) {
+        self.init(
+            red: (hex >> 16) & 0xFF,
+            green: (hex >> 8) & 0xFF,
+            blue: hex & 0xFF,
+            alpha: alpha
+        )
+    }
+    
+    static var redBack: UIColor { return UIColor(hex: 0xE71E1E) }
+    
+    static var blackText: UIColor { return UIColor(hex: 0x1C1C1C) }
+    
+    static var greyText: UIColor { return UIColor(hex: 0x686868) }
+}
+
+extension Date {
+    var millisecondsSince1970:Int64 {
+        return Int64((self.timeIntervalSince1970 * 1000.0).rounded())
+    }
+    
+    init(milliseconds:Int) {
+        self = Date(timeIntervalSince1970: TimeInterval(milliseconds / 1000))
     }
 }

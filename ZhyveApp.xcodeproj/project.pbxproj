@@ -13,6 +13,7 @@
 		2FC12F4B24ED5A61000539B8 /* SpinnerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC12F4A24ED5A61000539B8 /* SpinnerView.swift */; };
 		2FF96D3A24E866F6007E6420 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FF96D3924E866F6007E6420 /* Extensions.swift */; };
 		2FF96D3C24E86718007E6420 /* UserSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FF96D3B24E86718007E6420 /* UserSettings.swift */; };
+		BF31261424F6735F00B432A1 /* BCBController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF31261324F6735F00B432A1 /* BCBController.swift */; };
 		BF4FD17524EABE7A0040E67E /* Data+Bytes.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF4FD16B24EABE7A0040E67E /* Data+Bytes.swift */; };
 		BF4FD17624EABE7A0040E67E /* InternetAddress.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF4FD16C24EABE7A0040E67E /* InternetAddress.swift */; };
 		BF4FD17724EABE7A0040E67E /* DNSResolver.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF4FD16D24EABE7A0040E67E /* DNSResolver.swift */; };
@@ -38,6 +39,7 @@
 		2FC12F4A24ED5A61000539B8 /* SpinnerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpinnerView.swift; sourceTree = "<group>"; };
 		2FF96D3924E866F6007E6420 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		2FF96D3B24E86718007E6420 /* UserSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSettings.swift; sourceTree = "<group>"; };
+		BF31261324F6735F00B432A1 /* BCBController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BCBController.swift; sourceTree = "<group>"; };
 		BF4FD16B24EABE7A0040E67E /* Data+Bytes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Data+Bytes.swift"; sourceTree = "<group>"; };
 		BF4FD16C24EABE7A0040E67E /* InternetAddress.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InternetAddress.swift; sourceTree = "<group>"; };
 		BF4FD16D24EABE7A0040E67E /* DNSResolver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DNSResolver.swift; sourceTree = "<group>"; };
@@ -73,6 +75,7 @@
 			isa = PBXGroup;
 			children = (
 				BF627B3224E7D54E00021F2B /* ViewController.swift */,
+				BF31261324F6735F00B432A1 /* BCBController.swift */,
 				2F188C8924ED183F0011BED3 /* InfoController.swift */,
 				2F188C8C24ED262B0011BED3 /* SettingsController.swift */,
 				2F34001E24EFF8F5001F81FD /* OnboardingController.swift */,
@@ -231,6 +234,7 @@
 				2F34001F24EFF8F5001F81FD /* OnboardingController.swift in Sources */,
 				2FC12F4B24ED5A61000539B8 /* SpinnerView.swift in Sources */,
 				BF4FD18024EAC3060040E67E /* Reachability.swift in Sources */,
+				BF31261424F6735F00B432A1 /* BCBController.swift in Sources */,
 				BF4FD17724EABE7A0040E67E /* DNSResolver.swift in Sources */,
 				BF4FD17524EABE7A0040E67E /* Data+Bytes.swift in Sources */,
 				BF4FD17C24EABE7A0040E67E /* NSTimer+ClosureKit.swift in Sources */,
@@ -383,7 +387,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 7KY3GQTNV6;
 				INFOPLIST_FILE = ZhyveApp/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -391,7 +395,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = by.naveksoft.cctv;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -403,7 +407,7 @@
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = 7KY3GQTNV6;
 				INFOPLIST_FILE = ZhyveApp/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -412,7 +416,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "Cctv Development";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

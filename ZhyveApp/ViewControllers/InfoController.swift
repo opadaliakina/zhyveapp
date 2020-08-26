@@ -26,6 +26,10 @@ class InfoController: UIViewController {
         settingsButton.isHidden = !UIDevice.isHapticsSupported
     }
     
+    override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
+        return .portrait
+    }
+    
     
     @IBAction func closeAction(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)

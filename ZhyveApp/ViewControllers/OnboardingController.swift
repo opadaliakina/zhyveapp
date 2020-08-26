@@ -26,6 +26,9 @@ class OnboardingController: UIViewController {
         super.viewDidAppear(animated)
     }
     
+    override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
+        return .portrait
+    }
     
     @IBAction func nextButton(_ sender: Any) {
         let sb = UIStoryboard.init(name: "Main", bundle: nil)

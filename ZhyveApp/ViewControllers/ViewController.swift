@@ -29,8 +29,6 @@ class ViewController: UIViewController {
     @IBOutlet weak var swipeView: UIView!
     @IBOutlet weak var overlay: UIView!
     
-    @IBOutlet weak var mainLabelBottomConstraint: NSLayoutConstraint!
-    
     var spinner: SpinnerView?
     
     var currentType: ScopeType = .liveBelarus
@@ -52,8 +50,6 @@ class ViewController: UIViewController {
     
     var fullCycleTimer: Timer? = Timer()
     var loopTimer: Timer? = Timer()
-    
-    var systemBrightness = CGFloat()
     
     let liveBelarusTiming: [Timing] = [
         Timing(time: 0.35, state: true, range: NSRange(location: 0, length: 2)),
@@ -95,19 +91,22 @@ class ViewController: UIViewController {
         
         //        let swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(respondToSwipeGesture(gesture:)))
         //        swipeView.addGestureRecognizer(swipeRight)
-        let overlayTapRecognizer = UITapGestureRecognizer(target: self, action: #selector(overlayTap))
-        overlay.addGestureRecognizer(overlayTapRecognizer)
-        if isSmallIPhone() {
-            mainLabelBottomConstraint.constant = 50
-        }
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
-        return .darkContent
+        if #available(iOS 13.0, *) {
+            return .darkContent
+        } else {
+            return UIStatusBarStyle.default
+        }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
+    }
+    
+    override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
+        return .portrait
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -116,26 +115,10 @@ class ViewController: UIViewController {
         makeButtonUI(phoneButtton)
         makeButtonUI(burgerButton)
         makeButtonUI(lightButton)
-        mainLabelTextAligment()
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-    }
-    
-    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
-        super.viewWillTransition(to: size, with: coordinator)
-        print(mainTextLabel.textAlignment.rawValue)
-        coordinator.animateAlongsideTransition(in: self.view, animation: { [weak self] (context) in
-            guard let self = self else {return}
-            self.mainLabelTextAligment()
-            if let spinner = self.spinner, !spinner.isHidden {
-                self.spinner?.center.x = self.view.center.x
-                self.spinner?.center.y = self.lightButton.center.y
-            }
-        }) { (completionContext) in
-            print(self.mainTextLabel.textAlignment.rawValue)
-        }
     }
     
     func bottomButonUI() {
@@ -173,27 +156,6 @@ class ViewController: UIViewController {
         }
     }
     
-    func mainLabelTextAligment() {
-        switch UIApplication.shared.statusBarOrientation {
-        case .landscapeLeft,.landscapeRight:
-            if isSmallIPhone() {
-                mainLabelBottomConstraint.constant = 16
-            }
-            if isIphone6() {
-                mainLabelBottomConstraint.constant = 50
-            }
-            self.mainTextLabel.textAlignment = .center
-        case .portrait, .portraitUpsideDown,.unknown:
-            if isSmallIPhone() || isIphone6()  {
-                mainLabelBottomConstraint.constant = 50
-            }
-            if isIphone6() {
-                mainLabelBottomConstraint.constant = 100
-            }
-            self.mainTextLabel.textAlignment = .left
-        }
-    }
-    
     @objc func respondToSwipeGesture(gesture: UIGestureRecognizer) {
         flashOn = false
         if currentType == .liveBelarus {
@@ -206,10 +168,6 @@ class ViewController: UIViewController {
         }) { (completed) in
             
         }
-    }
-    
-    @objc func overlayTap() {
-        burgerButton.alpha == 1 ? hideTopButtons(true) : hideTopButtons(false)
     }
     
     func addSpinner() {
@@ -232,42 +190,6 @@ class ViewController: UIViewController {
     
     // MARK: - Actions
     
-    @IBAction func showSettings(_ sender: Any) {
-        flashOn = false
-        performSegue(withIdentifier: "showInfo", sender: nil)
-    }
-    
-    @IBAction func phoneAction(_ sender: Any?) {
-        flashOn = false
-        if overlay.isHidden {
-            systemBrightness = UIScreen.main.brightness
-            UIView.animate(withDuration: 0.5, animations: {
-                self.phoneButtton.backgroundColor = .white
-                self.burgerButton.backgroundColor = .white
-                self.overlay.isHidden = false
-                self.overlay.alpha = 1
-                self.phoneButtton.setImage(UIImage.init(named: "light"), for: .normal)
-                self.burgerButton.setImage(UIImage.init(named: "burger_white"), for: .normal)
-            }) { (completed) in
-                UIScreen.main.brightness = CGFloat(1)
-                self.hideTopButtons(true, delay: 0.5)
-            }
-        } else {
-            UIView.animate(withDuration: 0.5, animations: {
-                self.overlay.alpha = 0
-                self.phoneButtton.setImage(UIImage.init(named: self.currentType == .liveBelarus ? "phone_white" : "phone_red"), for: .normal)
-                self.burgerButton.setImage(UIImage.init(named: self.currentType == .liveBelarus ? "burger_white" : "burger_red"), for: .normal)
-                self.phoneButtton.backgroundColor = self.currentType == .liveBelarus ? .white : .redBack
-                self.burgerButton.backgroundColor = self.currentType == .liveBelarus ? .white : .redBack
-            }) { (completed) in
-                self.overlay.isHidden = true
-                UIScreen.main.brightness = self.systemBrightness
-                self.hideTopButtons(false, delay: 0.5)
-            }
-        }
-        
-    }
-    
     @IBAction func lightAction(_ sender: Any?) {
         self.flashOn.toggle()
         removeSpinner()
@@ -282,6 +204,8 @@ class ViewController: UIViewController {
             }
         }
     }
+    
+    // MARK: - Flash
     
     func checkIfCanFireFlash(date: Date) {
         let before = Date().millisecondsSince1970 % 100
@@ -327,14 +251,6 @@ class ViewController: UIViewController {
         }
     }
     
-    func runFlash() {
-        self.flashOn.toggle()
-        self.counter = 0
-        self.textCounter = 0
-        self.recursionTextFlash()
-        self.recursionFlash()
-    }
-    
     private func recursionFlash() {
         if flashOn, counter >= 0 {
             let timesArray = self.currentType == .liveBelarus ? liveBelarusTiming : changesTiming
@@ -378,6 +294,7 @@ class ViewController: UIViewController {
             attributed.addAttribute(.foregroundColor, value: UIColor.blackText, range: NSMakeRange(0, range.location))
         }
         self.mainTextLabel.attributedText = attributed
+        print("flash text")
         self.delay(bySeconds: seconds) {
             completion?()
         }
@@ -400,7 +317,6 @@ class ViewController: UIViewController {
             
             loopTimer = Timer.scheduledTimer(withTimeInterval: seconds, repeats: false) { [weak self] (timer) in
                 guard let self = self else {return}
-                print("Second timer")
                 if self.flashOn {
                     completion?()
                 }
@@ -417,41 +333,5 @@ class ViewController: UIViewController {
     public func delay(bySeconds seconds: Double, closure: @escaping () -> Void) {
         let dispatchTime = DispatchTime.now() + seconds
         DispatchQueue.main.asyncAfter(deadline: dispatchTime, execute: closure)
-    }
-}
-
-extension UIColor {
-    
-    convenience init(red: Int, green: Int, blue: Int, alpha: Float = 1.0) {
-        assert(red >= 0 && red <= 255, "Invalid red component")
-        assert(green >= 0 && green <= 255, "Invalid green component")
-        assert(blue >= 0 && blue <= 255, "Invalid blue component")
-        
-        self.init(red: CGFloat(red) / 255.0, green: CGFloat(green) / 255.0, blue: CGFloat(blue) / 255.0, alpha: CGFloat(alpha))
-    }
-    
-    convenience init(hex: Int, alpha: Float = 1.0) {
-        self.init(
-            red: (hex >> 16) & 0xFF,
-            green: (hex >> 8) & 0xFF,
-            blue: hex & 0xFF,
-            alpha: alpha
-        )
-    }
-    
-    static var redBack: UIColor { return UIColor(hex: 0xE71E1E) }
-    
-    static var blackText: UIColor { return UIColor(hex: 0x1C1C1C) }
-    
-    static var greyText: UIColor { return UIColor(hex: 0x686868) }
-}
-
-extension Date {
-    var millisecondsSince1970:Int64 {
-        return Int64((self.timeIntervalSince1970 * 1000.0).rounded())
-    }
-    
-    init(milliseconds:Int) {
-        self = Date(timeIntervalSince1970: TimeInterval(milliseconds / 1000))
     }
 }
