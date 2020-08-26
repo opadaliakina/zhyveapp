@@ -12,6 +12,7 @@ class BCBController: UIViewController {
     
     @IBOutlet weak var burgerButton: UIButton!
     @IBOutlet weak var lightButton: UIButton!
+    @IBOutlet weak var overlay: UIView!
     
     var systemBrightness = CGFloat()
 
@@ -19,7 +20,7 @@ class BCBController: UIViewController {
         super.viewDidLoad()
 
         let overlayTapRecognizer = UITapGestureRecognizer(target: self, action: #selector(overlayTap))
-        view.addGestureRecognizer(overlayTapRecognizer)
+        overlay.addGestureRecognizer(overlayTapRecognizer)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -34,17 +35,21 @@ class BCBController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        self.hideTopButtons(true, delay: 0.5)
+        perform(#selector(hideTopButtons), with: nil, afterDelay: 0.5)
     }
     
     @objc func overlayTap() {
-        burgerButton.alpha == 1 ? hideTopButtons(true) : hideTopButtons(false)
+        if burgerButton.isHidden {
+            burgerButton.isHidden = false
+            lightButton.isHidden = false
+            perform(#selector(hideTopButtons), with: nil, afterDelay: 2)
+        }
     }
     
-    func hideTopButtons(_ hide: Bool, delay: TimeInterval = 0) {
-        UIView.animate(withDuration: 0.3, delay: delay, options: [.allowUserInteraction,.curveEaseInOut], animations: {
-            self.burgerButton.alpha = hide ? 0 : 1
-            self.lightButton.alpha = hide ? 0 : 1
+    @objc func hideTopButtons() {
+        UIView.animate(withDuration: 0.3, delay: 0, options: [.allowUserInteraction,.curveEaseInOut], animations: {
+            self.burgerButton.isHidden = true
+            self.lightButton.isHidden = true
         }) { (completed) in
             
         }

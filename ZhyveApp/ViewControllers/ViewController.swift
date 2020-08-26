@@ -27,7 +27,6 @@ class ViewController: UIViewController {
     @IBOutlet weak var lightButton: UIButton!
     @IBOutlet weak var mainTextLabel: UILabel!
     @IBOutlet weak var swipeView: UIView!
-    @IBOutlet weak var overlay: UIView!
     
     var spinner: SpinnerView?
     

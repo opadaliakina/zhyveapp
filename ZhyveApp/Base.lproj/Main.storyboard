@@ -255,7 +255,6 @@
                                     </label>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstItem="DRU-jo-4af" firstAttribute="top" secondItem="I76-Rl-M3V" secondAttribute="top" constant="73" id="2Bm-LA-bKs"/>
                                     <constraint firstAttribute="trailing" secondItem="uQM-7j-VDM" secondAttribute="trailing" constant="53" id="9qx-AN-gSI"/>
                                     <constraint firstAttribute="trailing" secondItem="DRU-jo-4af" secondAttribute="trailing" constant="32" id="QK8-OT-M06"/>
                                     <constraint firstItem="uQM-7j-VDM" firstAttribute="leading" secondItem="I76-Rl-M3V" secondAttribute="leading" constant="53" id="U3m-Nx-5gt"/>
@@ -301,6 +300,7 @@
                             <constraint firstItem="onC-aP-f7n" firstAttribute="leading" secondItem="24l-dL-9y7" secondAttribute="leading" constant="32" id="SgG-KK-ty7"/>
                             <constraint firstItem="ufC-dV-kSe" firstAttribute="leading" secondItem="24l-dL-9y7" secondAttribute="leading" constant="32" id="hrE-jq-uAV"/>
                             <constraint firstItem="24l-dL-9y7" firstAttribute="trailing" secondItem="ufC-dV-kSe" secondAttribute="trailing" constant="32" id="ivg-9v-rBd"/>
+                            <constraint firstItem="DRU-jo-4af" firstAttribute="top" secondItem="24l-dL-9y7" secondAttribute="top" constant="29" id="kJj-bF-T6W"/>
                             <constraint firstItem="ufC-dV-kSe" firstAttribute="top" secondItem="I76-Rl-M3V" secondAttribute="bottom" constant="16" id="twT-yI-hC5"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="24l-dL-9y7"/>
@@ -399,10 +399,10 @@
                             <constraint firstItem="cSG-Uw-Qtk" firstAttribute="leading" secondItem="TTN-Xy-TEw" secondAttribute="leading" constant="32" id="1U8-fo-fl8"/>
                             <constraint firstItem="yL5-CA-uIu" firstAttribute="leading" secondItem="TTN-Xy-TEw" secondAttribute="leading" constant="32" id="2vF-cK-Qb8"/>
                             <constraint firstItem="TTN-Xy-TEw" firstAttribute="trailing" secondItem="yL5-CA-uIu" secondAttribute="trailing" constant="32" id="Bdz-Hj-e4Z"/>
+                            <constraint firstItem="yL5-CA-uIu" firstAttribute="top" secondItem="TTN-Xy-TEw" secondAttribute="top" constant="29" id="Grl-Jx-AAb"/>
                             <constraint firstItem="10N-ts-Htj" firstAttribute="top" secondItem="cSG-Uw-Qtk" secondAttribute="bottom" constant="40" id="IjM-x8-Qe5"/>
                             <constraint firstItem="10N-ts-Htj" firstAttribute="leading" secondItem="TTN-Xy-TEw" secondAttribute="leading" constant="32" id="Txn-s1-EbH"/>
                             <constraint firstItem="TTN-Xy-TEw" firstAttribute="trailing" secondItem="10N-ts-Htj" secondAttribute="trailing" constant="32" id="Ubc-Hy-6Aa"/>
-                            <constraint firstItem="yL5-CA-uIu" firstAttribute="top" secondItem="m9c-WY-CFz" secondAttribute="top" constant="73" id="Z3k-iY-nAP"/>
                             <constraint firstItem="cSG-Uw-Qtk" firstAttribute="centerY" secondItem="yL5-CA-uIu" secondAttribute="centerY" id="c6Q-og-11g"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="TTN-Xy-TEw"/>
@@ -468,7 +468,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="cWj-Fa-YVq"/>
+        <segue reference="tqj-Dq-qLB"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="arrow" width="22.5" height="8"/>
