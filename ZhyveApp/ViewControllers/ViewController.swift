@@ -104,6 +104,9 @@ class ViewController: UIViewController {
         if segue.identifier == "showFlag" {
           self.flashOn = false
         }
+        if segue.destination is BCBController {
+            self.flashOn = false
+        }
     }
     
     override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
@@ -218,7 +221,6 @@ class ViewController: UIViewController {
         }
         let now = Date().millisecondsSince1970 % 100
         timeToWait -= now - before
-        print(timeToWait)
         
         //        usleep(useconds_t(timeToWait * 1000))
         var completionTime = Int64()
@@ -234,7 +236,6 @@ class ViewController: UIViewController {
         _ = Timer.scheduledTimer(withTimeInterval: TimeInterval(Double(timeToWait - completionTime) / 1000), repeats: false) { [weak self] (timer) in
             guard let self = self else {return}
             if self.flashOn {
-//                print("circle complited")
                 self.spinner?.completeCircle(forTime: CFTimeInterval(completionTime))
             }
         }
@@ -243,7 +244,6 @@ class ViewController: UIViewController {
             guard let self = self else {return}
             if self.flashOn {
                 self.removeSpinner()
-                print("First timer")
                 self.counter = 0
                 self.textCounter = 0
                 self.recursionTextFlash()
@@ -296,8 +296,6 @@ class ViewController: UIViewController {
             attributed.addAttribute(.foregroundColor, value: UIColor.blackText, range: NSMakeRange(0, range.location))
         }
         self.mainTextLabel.attributedText = attributed
-        print("....")
-        print("flash text")
         _ = Timer.scheduledTimer(withTimeInterval: seconds, repeats: false) { [weak self] (timer) in
             guard let self = self else {return}
             if self.flashOn {

@@ -12,7 +12,6 @@ class BCBController: UIViewController {
     
     @IBOutlet weak var burgerButton: UIButton!
     @IBOutlet weak var lightButton: UIButton!
-    @IBOutlet weak var overlay: UIView!
     
     var systemBrightness = CGFloat()
 
@@ -20,7 +19,7 @@ class BCBController: UIViewController {
         super.viewDidLoad()
 
         let overlayTapRecognizer = UITapGestureRecognizer(target: self, action: #selector(overlayTap))
-        overlay.addGestureRecognizer(overlayTapRecognizer)
+        view.addGestureRecognizer(overlayTapRecognizer)
     }
     
     override func viewWillAppear(_ animated: Bool) {
