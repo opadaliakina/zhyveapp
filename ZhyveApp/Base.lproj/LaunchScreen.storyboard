@@ -2,7 +2,9 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -19,13 +21,14 @@
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </imageView>
                         </subviews>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" red="0.90588235294117647" green="0.11764705882352941" blue="0.11764705882352941" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="G6V-qw-g7a" secondAttribute="trailing" id="4z0-3z-Bep"/>
                             <constraint firstItem="G6V-qw-g7a" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" id="JbO-X0-uFM"/>
                             <constraint firstAttribute="bottom" secondItem="G6V-qw-g7a" secondAttribute="bottom" id="QEw-eT-ZU3"/>
                             <constraint firstItem="G6V-qw-g7a" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" id="Wyd-bK-BXd"/>
                         </constraints>
+                        <viewLayoutGuide key="safeArea" id="zCc-0d-Zfw"/>
                     </view>
                     <nil key="simulatedTopBarMetrics"/>
                 </viewController>

@@ -163,7 +163,6 @@
                         <outlet property="burgerButton" destination="rRL-04-heM" id="Uy8-Vt-b2W"/>
                         <outlet property="lightButton" destination="3pl-F8-nly" id="38W-NM-FQX"/>
                         <outlet property="mainTextLabel" destination="ccI-mr-CiH" id="yQ8-l4-ElI"/>
-                        <outlet property="overlay" destination="nce-6d-aQM" id="mmn-af-1wA"/>
                         <outlet property="phoneButtton" destination="lcI-xH-Y4z" id="9Zu-uZ-SCo"/>
                         <outlet property="swipeView" destination="yMV-IR-fyl" id="cZs-qY-Jq8"/>
                     </connections>
@@ -468,7 +467,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="tqj-Dq-qLB"/>
+        <segue reference="cWj-Fa-YVq"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="arrow" width="22.5" height="8"/>
